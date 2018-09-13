@@ -30,4 +30,4 @@ class StatusCreateAPIView(generics.CreateAPIView):
 
 ## Test
 
-<http://127.0.0.1:8000/api/create/>
+<http://127.0.0.1:8000/api/status/create/>
