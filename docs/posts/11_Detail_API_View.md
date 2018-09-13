@@ -1,5 +1,18 @@
 # 11. Detail API View
 
+## Create view
+
+```python
+# status/api/views.py
+
+class StatusDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    # lookup_field = 'slug'
+```
+
 ## urls 추가
 
 ```python
@@ -13,19 +26,6 @@ urlpatterns = [
     ...
     path('<int:pk>/', StatusDetailAPIView.as_view()),
 ]
-```
-
-## Create view
-
-```python
-# status/api/views.py
-
-class StatusDetailAPIView(generics.RetrieveAPIView):
-    permission_classes = []
-    authentication_classes = []
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-    # lookup_field = 'slug'
 ```
 
 ## Test

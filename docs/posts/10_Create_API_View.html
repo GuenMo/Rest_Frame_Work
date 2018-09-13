@@ -278,18 +278,6 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="10-create-api-view">10. Create API View</h1>
-<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
-
-<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
-
-<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView
-
-urlpatterns = [
-    ...
-    path(<span class="hljs-string">&apos;create/&apos;</span>, StatusCreateAPIView.as_view()),
-]
-</code></pre>
 <h2 id="create-view">Create view</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
 
@@ -301,6 +289,18 @@ urlpatterns = [
 
     <span class="hljs-comment"># def perform_create(self, serializer):</span>
     <span class="hljs-comment">#     serializer.save(user=self.request.user)</span>
+</code></pre>
+<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
+
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView
+
+urlpatterns = [
+    ...
+    path(<span class="hljs-string">&apos;create/&apos;</span>, StatusCreateAPIView.as_view()),
+]
 </code></pre>
 <h2 id="test">Test</h2>
 <p><a href="http://127.0.0.1:8000/api/status/create/" target="_blank">http://127.0.0.1:8000/api/status/create/</a></p>
@@ -347,7 +347,7 @@ urlpatterns = [
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"10. Create API View","level":"1.10","depth":1,"next":{"title":"11. Detail API View","level":"1.11","depth":1,"path":"posts/11_Detail_API_View.md","ref":"posts/11_Detail_API_View.md","articles":[]},"previous":{"title":"9. List & Search API View","level":"1.9","depth":1,"path":"posts/09_List_Search_API_View.md","ref":"posts/09_List_Search_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/10_Create_API_View.md","mtime":"2018-09-13T12:05:51.129Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T12:15:18.763Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"10. Create API View","level":"1.10","depth":1,"next":{"title":"11. Detail API View","level":"1.11","depth":1,"path":"posts/11_Detail_API_View.md","ref":"posts/11_Detail_API_View.md","articles":[]},"previous":{"title":"9. List & Search API View","level":"1.9","depth":1,"path":"posts/09_List_Search_API_View.md","ref":"posts/09_List_Search_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/10_Create_API_View.md","mtime":"2018-09-13T13:50:44.523Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T13:56:52.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

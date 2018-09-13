@@ -1,20 +1,5 @@
 # 10. Create API View
 
-## urls 추가
-
-```python
-# status/api/urls.py
-
-from django.urls import path
-
-from .views import StatusAPIView, StatusCreateAPIView
-
-urlpatterns = [
-    ...
-    path('create/', StatusCreateAPIView.as_view()),
-]
-```
-
 ## Create view
 
 ```python
@@ -28,6 +13,21 @@ class StatusCreateAPIView(generics.CreateAPIView):
 
     # def perform_create(self, serializer):
     #     serializer.save(user=self.request.user)
+```
+
+## urls 추가
+
+```python
+# status/api/urls.py
+
+from django.urls import path
+
+from .views import StatusAPIView, StatusCreateAPIView
+
+urlpatterns = [
+    ...
+    path('create/', StatusCreateAPIView.as_view()),
+]
 ```
 
 ## Test

@@ -1,19 +1,5 @@
 # 9. List & Search API View
 
-## urls 추가
-
-```python
-# status/api/urls.py
-
-from django.urls import path
-
-from .views import StatusAPIView
-
-urlpatterns = [
-    path('', StatusAPIView.as_view()),
-]
-```
-
 ## List view
 
 ```python
@@ -46,6 +32,20 @@ class StatusAPIView(generics.ListAPIView):
         if query is not None:
             qs = qs.filter(content__icontains=query)
         return qs
+```
+
+## urls 추가
+
+```python
+# status/api/urls.py
+
+from django.urls import path
+
+from .views import StatusAPIView
+
+urlpatterns = [
+    path('', StatusAPIView.as_view()),
+]
 ```
 
 ## Test
