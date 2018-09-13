@@ -50,5 +50,5 @@ class StatusAPIView(generics.ListAPIView):
 
 ## Test
 
-[List](http://127.0.0.1:8000/api/status/)
-[Search](http://127.0.0.1:8000/api/status/?q=new)
+<http://127.0.0.1:8000/api/status/>
+<http://127.0.0.1:8000/api/status/?q=new>
