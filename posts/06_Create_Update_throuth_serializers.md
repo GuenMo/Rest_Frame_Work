@@ -3,12 +3,8 @@
 ## Module import
 
 ```python
-import jsons
 from status.models import Status
 from status.api.srializers import StatusSerializer
-from rest_framework.renderers import JSONRenderer
-from django.utils.six import BytesIO
-from rest_framework.parsers import JSONParser
 ```
 
 ## Create

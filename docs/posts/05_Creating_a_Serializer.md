@@ -1,5 +1,13 @@
 # 5. Creating a Serializer
 
+## 폴더 및 파일 생성
+
+```commandline
+mkdir status/api
+touch __init__.py
+touch serializerpy
+```
+
 ## Serialize a single object
 
 ```python
