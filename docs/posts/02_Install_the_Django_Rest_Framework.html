@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>6. Create & Update throuth serializers · GitBook</title>
+        <title>2. Install the Django Rest Framework · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="07_Validation_Fields.html" />
+    <link rel="next" href="05_Creating_a_Serializer.html" />
     
     
-    <link rel="prev" href="05_Creating_a_Serializer.html" />
+    <link rel="prev" href="../" />
     
 
     </head>
@@ -102,7 +102,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="02_Install_the_Django_Rest_Framework.html">
+        <li class="chapter active" data-level="1.2" data-path="02_Install_the_Django_Rest_Framework.html">
             
                 <a href="02_Install_the_Django_Rest_Framework.html">
             
@@ -128,7 +128,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="06_Create_Update_throuth_serializers.html">
+        <li class="chapter " data-level="1.4" data-path="06_Create_Update_throuth_serializers.html">
             
                 <a href="06_Create_Update_throuth_serializers.html">
             
@@ -197,7 +197,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >6. Create & Update throuth serializers</a>
+        <a href=".." >2. Install the Django Rest Framework</a>
     </h1>
 </div>
 
@@ -212,43 +212,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="6-create--update-through-serializer">6. Create &amp; Update through Serializer</h1>
-<h2 id="module-import">Module import</h2>
-<pre><code class="lang-python"><span class="hljs-keyword">import</span> jsons
-<span class="hljs-keyword">from</span> status.models <span class="hljs-keyword">import</span> Status
-<span class="hljs-keyword">from</span> status.api.srializers <span class="hljs-keyword">import</span> StatusSerializer
-<span class="hljs-keyword">from</span> rest_framework.renderers <span class="hljs-keyword">import</span> JSONRenderer
-<span class="hljs-keyword">from</span> django.utils.six <span class="hljs-keyword">import</span> BytesIO
-<span class="hljs-keyword">from</span> rest_framework.parsers <span class="hljs-keyword">import</span> JSONParser
+                                <h1 id="2-install-the-django-rest-framework">2. Install the Django Rest Framework</h1>
+<h2 id="install-package">Install Package</h2>
+<pre><code class="lang-commandline">pip install djangorestframework
+pip install markdown
+pip install django-filter
 </code></pre>
-<h2 id="create">Create</h2>
-<pre><code class="lang-python">data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;&#xD558;&#xC774;~~&apos;</span>, <span class="hljs-string">&apos;image&apos;</span>: <span class="hljs-keyword">None</span>}
-serializer = StatusSerializer(data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-obj = Status.objects.last()
+<h2 id="add-app">Add app</h2>
+<pre><code class="lang-python">INSTALLED_APPS = []
+    ...
+    <span class="hljs-string">&apos;rest_framework&apos;</span>,
+]
 </code></pre>
-<h2 id="update">Update</h2>
-<pre><code class="lang-python">obj = Status.objects.last()
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Hello&apos;</span>}
-serializer = StatusSerializer(obj, data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-obj = Status.objects.last()
-</code></pre>
-<h2 id="delete">Delete</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># Create</span>
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Delete me.&apos;</span>}
-serializer = StatusSerializer(data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-<span class="hljs-comment"># Delete Error</span>
-obj = Status.objects.last()
-serializer = StatusSerializer(obj)
-serializer.delete() <span class="hljs-comment"># Error</span>
-serializer.data.delete() <span class="hljs-comment"># Error</span>
-<span class="hljs-comment"># Delete</span>
-obj.delete()
+<pre><code class="lang-commandline">python manage.py makemigrations
+python manage.py migrate
 </code></pre>
 
                                 
@@ -277,12 +254,12 @@ obj.delete()
 
             
                 
-                <a href="05_Creating_a_Serializer.html" class="navigation navigation-prev " aria-label="Previous page: 5. Creating a Serializer">
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 1. Introduction">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="07_Validation_Fields.html" class="navigation navigation-next " aria-label="Next page: 7. Validation & Fields">
+                <a href="05_Creating_a_Serializer.html" class="navigation navigation-next " aria-label="Next page: 5. Creating a Serializer">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -293,7 +270,7 @@ obj.delete()
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6. Create & Update throuth serializers","level":"1.4","depth":1,"next":{"title":"7. Validation & Fields","level":"1.5","depth":1,"path":"posts/07_Validation_Fields.md","ref":"posts/07_Validation_Fields.md","articles":[]},"previous":{"title":"5. Creating a Serializer","level":"1.3","depth":1,"path":"posts/05_Creating_a_Serializer.md","ref":"posts/05_Creating_a_Serializer.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/06_Create_Update_throuth_serializers.md","mtime":"2018-09-13T09:13:10.715Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T09:45:22.491Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2. Install the Django Rest Framework","level":"1.2","depth":1,"next":{"title":"5. Creating a Serializer","level":"1.3","depth":1,"path":"posts/05_Creating_a_Serializer.md","ref":"posts/05_Creating_a_Serializer.md","articles":[]},"previous":{"title":"1. Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/02_Install_the_Django_Rest_Framework.md","mtime":"2018-09-13T09:45:06.885Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T09:45:22.491Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
