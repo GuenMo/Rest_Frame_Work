@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>6. Create & Update throuth serializers · GitBook</title>
+        <title>10. Create API View · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="07_Validation_Fields.html" />
     
-    
-    <link rel="prev" href="05_Creating_a_Serializer.html" />
+    <link rel="prev" href="09_List_Search_API_View.html" />
     
 
     </head>
@@ -154,7 +152,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="06_Create_Update_throuth_serializers.html">
+        <li class="chapter " data-level="1.6" data-path="06_Create_Update_throuth_serializers.html">
             
                 <a href="06_Create_Update_throuth_serializers.html">
             
@@ -206,7 +204,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="10_Create_API_View.html">
+        <li class="chapter active" data-level="1.10" data-path="10_Create_API_View.html">
             
                 <a href="10_Create_API_View.html">
             
@@ -249,7 +247,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >6. Create & Update throuth serializers</a>
+        <a href=".." >10. Create API View</a>
     </h1>
 </div>
 
@@ -264,40 +262,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="6-create--update-through-serializer">6. Create &amp; Update through Serializer</h1>
-<h2 id="module-import">Module import</h2>
-<pre><code class="lang-python"><span class="hljs-keyword">from</span> status.models <span class="hljs-keyword">import</span> Status
-<span class="hljs-keyword">from</span> status.api.srializers <span class="hljs-keyword">import</span> StatusSerializer
+                                <h1 id="10-create-api-view">10. Create API View</h1>
+<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
+
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView
+
+urlpatterns = [
+    ...
+    path(<span class="hljs-string">&apos;create/&apos;</span>, StatusCreateAPIView.as_view()),
+]
 </code></pre>
-<h2 id="create">Create</h2>
-<pre><code class="lang-python">data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;&#xD558;&#xC774;~~&apos;</span>, <span class="hljs-string">&apos;image&apos;</span>: <span class="hljs-keyword">None</span>}
-serializer = StatusSerializer(data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-obj = Status.objects.last()
+<h2 id="create-view">Create view</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusCreateAPIView</span><span class="hljs-params">(generics.CreateAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
 </code></pre>
-<h2 id="update">Update</h2>
-<pre><code class="lang-python">obj = Status.objects.last()
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Hello&apos;</span>}
-serializer = StatusSerializer(obj, data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-obj = Status.objects.last()
-</code></pre>
-<h2 id="delete">Delete</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># Create</span>
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Delete me.&apos;</span>}
-serializer = StatusSerializer(data=data)
-<span class="hljs-keyword">if</span> serializer.is_valid():
-    serializer.save()
-<span class="hljs-comment"># Delete Error</span>
-obj = Status.objects.last()
-serializer = StatusSerializer(obj)
-serializer.delete() <span class="hljs-comment"># Error</span>
-serializer.data.delete() <span class="hljs-comment"># Error</span>
-<span class="hljs-comment"># Delete</span>
-obj.delete()
-</code></pre>
+<h2 id="test">Test</h2>
+<p><a href="http://127.0.0.1:8000/api/create/" target="_blank">Create</a></p>
 
                                 
                                 </section>
@@ -325,14 +313,10 @@ obj.delete()
 
             
                 
-                <a href="05_Creating_a_Serializer.html" class="navigation navigation-prev " aria-label="Previous page: 5. Creating a Serializer">
+                <a href="09_List_Search_API_View.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 9. List & Search API View">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="07_Validation_Fields.html" class="navigation navigation-next " aria-label="Next page: 7. Validation & Fields">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -341,7 +325,7 @@ obj.delete()
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6. Create & Update throuth serializers","level":"1.6","depth":1,"next":{"title":"7. Validation & Fields","level":"1.7","depth":1,"path":"posts/07_Validation_Fields.md","ref":"posts/07_Validation_Fields.md","articles":[]},"previous":{"title":"5. Creating a Serializer","level":"1.5","depth":1,"path":"posts/05_Creating_a_Serializer.md","ref":"posts/05_Creating_a_Serializer.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/06_Create_Update_throuth_serializers.md","mtime":"2018-09-13T10:11:41.133Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T11:52:44.598Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"10. Create API View","level":"1.10","depth":1,"previous":{"title":"9. List & Search API View","level":"1.9","depth":1,"path":"posts/09_List_Search_API_View.md","ref":"posts/09_List_Search_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/10_Create_API_View.md","mtime":"2018-09-13T11:49:59.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T11:52:44.598Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

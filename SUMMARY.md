@@ -8,3 +8,5 @@
 - [6. Create & Update throuth serializers](posts/06_Create_Update_throuth_serializers.md)
 - [7. Validation & Fields](posts/07_Validation_Fields.md)
 - [8. API Endpoints Overview](posts/08_API_Endpoints_Overview.md)
+- [9. List & Search API View](posts/09_List_Search_API_View.md)
+- [10. Create API View](posts/10_Create_API_View.md)
