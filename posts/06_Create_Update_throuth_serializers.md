@@ -3,7 +3,7 @@
 ## Module import
 
 ```python
-import json
+import jsons
 from status.models import Status
 from status.api.srializers import StatusSerializer
 from rest_framework.renderers import JSONRenderer
