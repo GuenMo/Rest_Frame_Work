@@ -1,4 +1,4 @@
-# 5.Creating a Serializer
+# 5. Creating a Serializer
 
 ## Serialize a single object
 
