@@ -26,6 +26,8 @@ class StatusCreateAPIView(generics.CreateAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
 
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
 ```
 
 ## Test
