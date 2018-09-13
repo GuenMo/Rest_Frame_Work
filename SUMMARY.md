@@ -11,3 +11,4 @@
 - [9. List & Search API View](posts/09_List_Search_API_View.md)
 - [10. Create API View](posts/10_Create_API_View.md)
 - [11. Detail API View](posts/11_Detail_API_View.md)
+- [12. Update & Delete API Views](posts/12_Update_Delete_API_Views.md)

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>11. Detail API View · GitBook</title>
+        <title>12. Update & Delete API Views · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="12_Update_Delete_API_Views.html" />
     
-    
-    <link rel="prev" href="10_Create_API_View.html" />
+    <link rel="prev" href="11_Detail_API_View.html" />
     
 
     </head>
@@ -219,7 +217,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.11" data-path="11_Detail_API_View.html">
+        <li class="chapter " data-level="1.11" data-path="11_Detail_API_View.html">
             
                 <a href="11_Detail_API_View.html">
             
@@ -232,7 +230,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="12_Update_Delete_API_Views.html">
+        <li class="chapter active" data-level="1.12" data-path="12_Update_Delete_API_Views.html">
             
                 <a href="12_Update_Delete_API_Views.html">
             
@@ -275,7 +273,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >11. Detail API View</a>
+        <a href=".." >12. Update & Delete API Views</a>
     </h1>
 </div>
 
@@ -290,31 +288,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="11-detail-api-view">11. Detail API View</h1>
+                                <h1 id="12-update--delete-api-views">12. Update &amp; Delete API Views</h1>
 <h2 id="create-view">Create view</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveAPIView)</span>:</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusUpdateAPIView</span><span class="hljs-params">(generics.UpdateAPIView)</span>:</span>
     permission_classes = []
     authentication_classes = []
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
-    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
+</code></pre>
+<h2 id="delete-view">Delete view</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDeleteAPIView</span><span class="hljs-params">(generics.DestroyAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
 </code></pre>
 <h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
 
 <span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
 
-<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView, StatusDetailAPIView
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView, StatusDetailAPIView, StatusUpdateAPIView, StatusDeleteAPIView
 
 urlpatterns = [
-    ...
+    path(<span class="hljs-string">&apos;&apos;</span>, StatusAPIView.as_view()),
+    path(<span class="hljs-string">&apos;create/&apos;</span>, StatusCreateAPIView.as_view()),
     path(<span class="hljs-string">&apos;&lt;int:pk&gt;/&apos;</span>, StatusDetailAPIView.as_view()),
+    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/update/&apos;</span>, StatusUpdateAPIView.as_view()),
+    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/delete/&apos;</span>, StatusDeleteAPIView.as_view()),
 ]
 </code></pre>
 <h2 id="test">Test</h2>
-<p><a href="http://127.0.0.1:8000/api/status/5s/" target="_blank">http://127.0.0.1:8000/api/status/5s/</a></p>
+<p><a href="http://127.0.0.1:8000/api/status/5/update/" target="_blank">http://127.0.0.1:8000/api/status/5/update/</a></p>
+<p><a href="http://127.0.0.1:8000/api/status/5/delete/" target="_blank">http://127.0.0.1:8000/api/status/5/delete/</a></p>
 
                                 
                                 </section>
@@ -342,14 +352,10 @@ urlpatterns = [
 
             
                 
-                <a href="10_Create_API_View.html" class="navigation navigation-prev " aria-label="Previous page: 10. Create API View">
+                <a href="11_Detail_API_View.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 11. Detail API View">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="12_Update_Delete_API_Views.html" class="navigation navigation-next " aria-label="Next page: 12. Update & Delete API Views">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -358,7 +364,7 @@ urlpatterns = [
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"11. Detail API View","level":"1.11","depth":1,"next":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"path":"posts/12_Update_Delete_API_Views.md","ref":"posts/12_Update_Delete_API_Views.md","articles":[]},"previous":{"title":"10. Create API View","level":"1.10","depth":1,"path":"posts/10_Create_API_View.md","ref":"posts/10_Create_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/11_Detail_API_View.md","mtime":"2018-09-13T13:51:00.520Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T13:57:56.533Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"previous":{"title":"11. Detail API View","level":"1.11","depth":1,"path":"posts/11_Detail_API_View.md","ref":"posts/11_Detail_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/12_Update_Delete_API_Views.md","mtime":"2018-09-13T13:54:23.597Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T13:57:56.533Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
