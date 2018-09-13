@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3. Status Model & App · GitBook</title>
+        <title>11. Detail API View · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="04_Model_From_for_Validation.html" />
     
-    
-    <link rel="prev" href="02_Install_the_Django_Rest_Framework.html" />
+    <link rel="prev" href="10_Create_API_View.html" />
     
 
     </head>
@@ -115,7 +113,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="03_Status_Model_App.html">
+        <li class="chapter " data-level="1.3" data-path="03_Status_Model_App.html">
             
                 <a href="03_Status_Model_App.html">
             
@@ -219,7 +217,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="11_Detail_API_View.html">
+        <li class="chapter active" data-level="1.11" data-path="11_Detail_API_View.html">
             
                 <a href="11_Detail_API_View.html">
             
@@ -262,7 +260,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3. Status Model & App</a>
+        <a href=".." >11. Detail API View</a>
     </h1>
 </div>
 
@@ -277,67 +275,31 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="3-status-model--app">3. Status Model &amp; App</h1>
-<h2 id="app-&#xC0DD;&#xC131;">App &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-commandlined">python managy.py startapp status
-</code></pre>
-<h2 id="model-&#xC0DD;&#xC131;">Model &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/models.py</span>
+                                <h1 id="11-detail-api-view">11. Detail API View</h1>
+<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
 
-<span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
-<span class="hljs-keyword">from</span> django.conf <span class="hljs-keyword">import</span> settings
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
 
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView, StatusDetailAPIView
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_status_image</span><span class="hljs-params">(instance, filename)</span>:</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;updateds/{user}/{filename}&quot;</span>.format(user=instance.user, filename=filename)
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusQuerySet</span><span class="hljs-params">(models.QuerySet)</span>:</span>
-    <span class="hljs-keyword">pass</span>
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusManager</span><span class="hljs-params">(models.Manager)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> StatusQuerySet(self.model, using=self._db)
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Status</span><span class="hljs-params">(models.Model)</span>:</span>
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField(null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    image = models.ImageField(upload_to=upload_status_image, null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    updated = models.DateTimeField(auto_now=<span class="hljs-keyword">True</span>)
-    timestamp = models.DateTimeField(auto_now_add=<span class="hljs-keyword">True</span>)
-
-    objects = StatusManager()
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> str(self.content)[:<span class="hljs-number">50</span>]
-
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>
-        verbose_name = <span class="hljs-string">&apos;Status post&apos;</span>
-        verbose_name_plural = <span class="hljs-string">&apos;Status posts&apos;</span>
-</code></pre>
-<h2 id="app-&#xB4F1;&#xB85D;">App &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># mysite/settings.py</span>
-
-INSTALLED_APPS = [
+urlpatterns = [
     ...
-    <span class="hljs-string">&apos;status&apos;</span>
+    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/&apos;</span>, StatusDetailAPIView.as_view()),
 ]
 </code></pre>
-<h2 id="migration">Migration</h2>
-<pre><code class="lang-commandline">python manage.py makemigrations
-python manage.py migrate
+<h2 id="create-view">Create view</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
 </code></pre>
-<h2 id="admin-page-&#xB4F1;&#xB85D;">Admin page &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/admin.py</span>
-
-<span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
-
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Status
-
-admin.site.register(Status)
-</code></pre>
+<h2 id="test">Test</h2>
+<p><a href="http://127.0.0.1:8000/api/status/5s/" target="_blank">http://127.0.0.1:8000/api/status/5s/</a></p>
 
                                 
                                 </section>
@@ -365,14 +327,10 @@ admin.site.register(Status)
 
             
                 
-                <a href="02_Install_the_Django_Rest_Framework.html" class="navigation navigation-prev " aria-label="Previous page: 2. Install the Django Rest Framework">
+                <a href="10_Create_API_View.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 10. Create API View">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="04_Model_From_for_Validation.html" class="navigation navigation-next " aria-label="Next page: 4. Model Form for Validation">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -381,7 +339,7 @@ admin.site.register(Status)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. Status Model & App","level":"1.3","depth":1,"next":{"title":"4. Model Form for Validation","level":"1.4","depth":1,"path":"posts/04_Model_From_for_Validation.md","ref":"posts/04_Model_From_for_Validation.md","articles":[]},"previous":{"title":"2. Install the Django Rest Framework","level":"1.2","depth":1,"path":"posts/02_Install_the_Django_Rest_Framework.md","ref":"posts/02_Install_the_Django_Rest_Framework.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/03_Status_Model_App.md","mtime":"2018-09-13T10:05:43.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T12:15:18.763Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"11. Detail API View","level":"1.11","depth":1,"previous":{"title":"10. Create API View","level":"1.10","depth":1,"path":"posts/10_Create_API_View.md","ref":"posts/10_Create_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/11_Detail_API_View.md","mtime":"2018-09-13T12:15:04.545Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T12:15:18.763Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

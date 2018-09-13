@@ -10,3 +10,4 @@
 - [8. API Endpoints Overview](posts/08_API_Endpoints_Overview.md)
 - [9. List & Search API View](posts/09_List_Search_API_View.md)
 - [10. Create API View](posts/10_Create_API_View.md)
+- [11. Detail API View](posts/11_Detail_API_View.md)
