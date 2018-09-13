@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3. Status Model & App · GitBook</title>
+        <title>13. Mixin to Power Http Methods · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="04_Model_From_for_Validation.html" />
     
-    
-    <link rel="prev" href="02_Install_the_Django_Rest_Framework.html" />
+    <link rel="prev" href="12_Update_Delete_API_Views.html" />
     
 
     </head>
@@ -115,7 +113,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="03_Status_Model_App.html">
+        <li class="chapter " data-level="1.3" data-path="03_Status_Model_App.html">
             
                 <a href="03_Status_Model_App.html">
             
@@ -245,7 +243,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="13_Mixins_to_Power_Http_Methods.html">
+        <li class="chapter active" data-level="1.13" data-path="13_Mixins_to_Power_Http_Methods.html">
             
                 <a href="13_Mixins_to_Power_Http_Methods.html">
             
@@ -288,7 +286,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3. Status Model & App</a>
+        <a href=".." >13. Mixin to Power Http Methods</a>
     </h1>
 </div>
 
@@ -303,67 +301,88 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="3-status-model--app">3. Status Model &amp; App</h1>
-<h2 id="app-&#xC0DD;&#xC131;">App &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-commandlined">python managy.py startapp status
-</code></pre>
-<h2 id="model-&#xC0DD;&#xC131;">Model &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/models.py</span>
+                                <h1 id="13-mixins-to-power-http-methods">13. Mixins to Power Http Methods</h1>
+<blockquote>
+<p><code>StatusAPIView(List)</code>, <code>StatusCreateAPIView(Create)</code>
+<code>StatusDetailAPIView(Retrieve)</code>, <code>StatusUpdateAPIView(Update)</code>, <code>StatusDeleteAPIView(Destroy)</code></p>
+<p>CRUD API&#xB97C; &#xAD6C;&#xD604; &#xD558;&#xAE30;&#xC704;&#xD574; &#xC704;&#xC758; 5&#xAC1C;&#xC758; View&#xB97C; &#xAD6C;&#xD604; &#xD588;&#xB2E4;.
+&#xD558;&#xC9C0;&#xB9CC; &#xCF54;&#xB4DC;&#xAC00; &#xBE44;&#xC2B7;&#xD558;&#xAC70;&#xB098; &#xAC19;&#xAE30;&#xB3C4; &#xD558;&#xB2E4;.
+&#xADF8;&#xB798;&#xC11C; 5&#xAC1C;&#xC758; &#xD074;&#xB798;&#xC2A4;&#xB97C; &#xD558;&#xB098;&#xB85C; &#xAD6C;&#xD604; &#xD55C;&#xB2E4;.</p>
+</blockquote>
+<h2 id="create--list">Create + List</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> mixins
 
-<span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
-<span class="hljs-keyword">from</span> django.conf <span class="hljs-keyword">import</span> settings
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusAPIView</span><span class="hljs-params">(mixins.CreateModelMixin, generics.ListAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    serializer_class = StatusSerializer
 
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_status_image</span><span class="hljs-params">(instance, filename)</span>:</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;updateds/{user}/{filename}&quot;</span>.format(user=instance.user, filename=filename)
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusQuerySet</span><span class="hljs-params">(models.QuerySet)</span>:</span>
-    <span class="hljs-keyword">pass</span>
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusManager</span><span class="hljs-params">(models.Manager)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> StatusQuerySet(self.model, using=self._db)
+        qs = Status.objects.all()
+        query = self.request.GET.get(<span class="hljs-string">&apos;q&apos;</span>)
+        <span class="hljs-keyword">if</span> query <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            qs = qs.filter(content__icontains=query)
+        <span class="hljs-keyword">return</span> qs
 
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.create(request, *args, **kwargs)
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Status</span><span class="hljs-params">(models.Model)</span>:</span>
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField(null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    image = models.ImageField(upload_to=upload_status_image, null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    updated = models.DateTimeField(auto_now=<span class="hljs-keyword">True</span>)
-    timestamp = models.DateTimeField(auto_now_add=<span class="hljs-keyword">True</span>)
-
-    objects = StatusManager()
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> str(self.content)[:<span class="hljs-number">50</span>]
-
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>
-        verbose_name = <span class="hljs-string">&apos;Status post&apos;</span>
-        verbose_name_plural = <span class="hljs-string">&apos;Status posts&apos;</span>
+    <span class="hljs-comment"># def perform_create(self, serializer):</span>
+    <span class="hljs-comment">#     serializer.save(user=self.request.user)</span>
 </code></pre>
-<h2 id="app-&#xB4F1;&#xB85D;">App &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># mysite/settings.py</span>
+<h2 id="detail--update--delete-id-pk-slug&#xB97C;-&#xACF5;&#xD1B5;&#xC73C;&#xB85C;-&#xD544;&#xC694;&#xB85C;-&#xD55C;&#xB2E4;">Detail + Update + Delete (id, pk, slug&#xB97C; &#xACF5;&#xD1B5;&#xC73C;&#xB85C; &#xD544;&#xC694;&#xB85C; &#xD55C;&#xB2E4;.)</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> mixins
 
-INSTALLED_APPS = [
-    ...
-    <span class="hljs-string">&apos;status&apos;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(mixins.DestroyModelMixin, mixins.UpdateModelMixin, generics.RetrieveAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">put</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.update(request, *args, **kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.destroy(request, *args, **kwargs)
+</code></pre>
+<h2 id="urls">urls</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusDetailAPIView
+
+urlpatterns = [
+    path(<span class="hljs-string">&apos;&apos;</span>, StatusAPIView.as_view()),
+    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/&apos;</span>, StatusDetailAPIView.as_view()),
 ]
 </code></pre>
-<h2 id="migration">Migration</h2>
-<pre><code class="lang-commandline">python manage.py makemigrations
-python manage.py migrate
+<h2 id="test1">Test1</h2>
+<p><a href="http://127.0.0.1:8000/api/status/" target="_blank">http://127.0.0.1:8000/api/status/</a></p>
+<p><a href="http://127.0.0.1:8000/api/status/8" target="_blank">http://127.0.0.1:8000/api/status/8</a></p>
+<h2 id="create--list--listcreateapiview">Create + List = ListCreateAPIView</h2>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusAPIView</span><span class="hljs-params">(generics.ListCreateAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    serializer_class = StatusSerializer
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        qs = Status.objects.all()
+        query = self.request.GET.get(<span class="hljs-string">&apos;q&apos;</span>)
+        <span class="hljs-keyword">if</span> query <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            qs = qs.filter(content__icontains=query)
+        <span class="hljs-keyword">return</span> qs
 </code></pre>
-<h2 id="admin-page-&#xB4F1;&#xB85D;">Admin page &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/admin.py</span>
-
-<span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
-
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Status
-
-admin.site.register(Status)
+<h2 id="detail--update--delete--retrieveupdatedestroyapiview">Detail + Update + Delete = RetrieveUpdateDestroyAPIView</h2>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveUpdateDestroyAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
 </code></pre>
+<h2 id="test2">Test2</h2>
+<p><a href="http://127.0.0.1:8000/api/status/" target="_blank">http://127.0.0.1:8000/api/status/</a></p>
+<p><a href="http://127.0.0.1:8000/api/status/8" target="_blank">http://127.0.0.1:8000/api/status/8</a></p>
 
                                 
                                 </section>
@@ -391,14 +410,10 @@ admin.site.register(Status)
 
             
                 
-                <a href="02_Install_the_Django_Rest_Framework.html" class="navigation navigation-prev " aria-label="Previous page: 2. Install the Django Rest Framework">
+                <a href="12_Update_Delete_API_Views.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 12. Update & Delete API Views">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="04_Model_From_for_Validation.html" class="navigation navigation-next " aria-label="Next page: 4. Model Form for Validation">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -407,7 +422,7 @@ admin.site.register(Status)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. Status Model & App","level":"1.3","depth":1,"next":{"title":"4. Model Form for Validation","level":"1.4","depth":1,"path":"posts/04_Model_From_for_Validation.md","ref":"posts/04_Model_From_for_Validation.md","articles":[]},"previous":{"title":"2. Install the Django Rest Framework","level":"1.2","depth":1,"path":"posts/02_Install_the_Django_Rest_Framework.md","ref":"posts/02_Install_the_Django_Rest_Framework.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/03_Status_Model_App.md","mtime":"2018-09-13T10:05:43.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T15:03:43.098Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"13. Mixin to Power Http Methods","level":"1.13","depth":1,"previous":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"path":"posts/12_Update_Delete_API_Views.md","ref":"posts/12_Update_Delete_API_Views.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/13_Mixins_to_Power_Http_Methods.md","mtime":"2018-09-13T14:40:49.425Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-13T15:03:43.098Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
