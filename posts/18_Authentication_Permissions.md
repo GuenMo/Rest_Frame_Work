@@ -2,7 +2,8 @@
 
 ## Django Sessions
 
-> 페이지에 로그인 한 유저의 이름을 알아 낸다.
+> authentication_classes 는 user 어떤 방식으로 인증 할 것인가를 결정 짓는다
+> SessionAuthentication 란 페이지에 로그인 한 user로 인증 한다.
 
 ```python+theme:dark+lineNumbers:true
 # views.py
@@ -48,20 +49,37 @@ class StatusSerializer(serializers.ModelSerializer):
             'image'
         ]
         read_only_fields = ['id', 'user']
+...
+```
+
+## Permissions
+
+> permission_classes 는 권한을 설정 한다. 
+> 로그 아웃 상태에서는 StatusAPIView 에서 에러가 난다.
+> perform_create 함수에서 user 객체가 정의 되지 않기 때문이다.
+> IsAuthenticatedOrReadOnly 란 로그인 된 user에게 쓰기 읽기 권한을 주고 그렇지 않을 경우 읽기 권한만 준다.
+
+```python+theme:dark+lineNumbers:true
+from rest_framework import generics, permissions
+from rest_framework.authentication import SessionAuthentication
+
+from status.models import Status
+from .srializers import StatusSerializer
 
 
-    def validate_content(self, value):
-        if len(value) > 240:
-            raise serializers.ValidationError('Content is too long.')
-        return value
+class StatusAPIView(generics.ListCreateAPIView):
 
-    def validate(self, data):
-        content = data.get('content', None)
-        if content == '':
-            content = None
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [SessionAuthentication]
+    serializer_class = StatusSerializer
 
-        image = data.get('image', None)
-        if content is None and image is None:
-            raise serializers.ValidationError('Content or image is required.')
-        return data
+    def get_queryset(self):
+        qs = Status.objects.all()
+        query = self.request.GET.get('q')
+        if query is not None:
+            qs = qs.filter(content__icontains=query)
+        return qs
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 ```

@@ -369,7 +369,8 @@
                                 <h1 id="18-authentication--permissions">18. Authentication &amp; Permissions</h1>
 <h2 id="django-sessions">Django Sessions</h2>
 <blockquote>
-<p>&#xD398;&#xC774;&#xC9C0;&#xC5D0; &#xB85C;&#xADF8;&#xC778; &#xD55C; &#xC720;&#xC800;&#xC758; &#xC774;&#xB984;&#xC744; &#xC54C;&#xC544; &#xB0B8;&#xB2E4;.</p>
+<p>authentication_classes &#xB294; user &#xC5B4;&#xB5A4; &#xBC29;&#xC2DD;&#xC73C;&#xB85C; &#xC778;&#xC99D; &#xD560; &#xAC83;&#xC778;&#xAC00;&#xB97C; &#xACB0;&#xC815; &#xC9D3;&#xB294;&#xB2E4;
+SessionAuthentication &#xB780; &#xD398;&#xC774;&#xC9C0;&#xC5D0; &#xB85C;&#xADF8;&#xC778; &#xD55C; user&#xB85C; &#xC778;&#xC99D; &#xD55C;&#xB2E4;.</p>
 </blockquote>
 <pre><code class="lang-python+theme:dark+lineNumbers:true"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container" style="border-width: 1px; border-style: solid;"><div class="sunlight-line-number-margin"><a name="sunlight-67-line-1" href="#sunlight-67-line-1">1</a>
 <a name="sunlight-67-line-2" href="#sunlight-67-line-2">2</a>
@@ -432,21 +433,6 @@
 <a name="sunlight-68-line-17" href="#sunlight-68-line-17">17</a>
 <a name="sunlight-68-line-18" href="#sunlight-68-line-18">18</a>
 <a name="sunlight-68-line-19" href="#sunlight-68-line-19">19</a>
-<a name="sunlight-68-line-20" href="#sunlight-68-line-20">20</a>
-<a name="sunlight-68-line-21" href="#sunlight-68-line-21">21</a>
-<a name="sunlight-68-line-22" href="#sunlight-68-line-22">22</a>
-<a name="sunlight-68-line-23" href="#sunlight-68-line-23">23</a>
-<a name="sunlight-68-line-24" href="#sunlight-68-line-24">24</a>
-<a name="sunlight-68-line-25" href="#sunlight-68-line-25">25</a>
-<a name="sunlight-68-line-26" href="#sunlight-68-line-26">26</a>
-<a name="sunlight-68-line-27" href="#sunlight-68-line-27">27</a>
-<a name="sunlight-68-line-28" href="#sunlight-68-line-28">28</a>
-<a name="sunlight-68-line-29" href="#sunlight-68-line-29">29</a>
-<a name="sunlight-68-line-30" href="#sunlight-68-line-30">30</a>
-<a name="sunlight-68-line-31" href="#sunlight-68-line-31">31</a>
-<a name="sunlight-68-line-32" href="#sunlight-68-line-32">32</a>
-<a name="sunlight-68-line-33" href="#sunlight-68-line-33">33</a>
-<a name="sunlight-68-line-34" href="#sunlight-68-line-34">34</a>
 </div><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;seializers.py</span>
 
 <span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">serializers</span>
@@ -465,22 +451,59 @@
 &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;image&apos;</span>
 &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">]</span>
 &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">read_only_fields</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">]</span>
+<span class="sunlight-ellipsis">...</span>
+</span></pre></div></div></code></pre>
+<h2 id="permissions">Permissions</h2>
+<blockquote>
+<p>permission_classes &#xB294; &#xAD8C;&#xD55C;&#xC744; &#xC124;&#xC815; &#xD55C;&#xB2E4;. 
+&#xB85C;&#xADF8; &#xC544;&#xC6C3; &#xC0C1;&#xD0DC;&#xC5D0;&#xC11C;&#xB294; StatusAPIView &#xC5D0;&#xC11C; &#xC5D0;&#xB7EC;&#xAC00; &#xB09C;&#xB2E4;.
+perform_create &#xD568;&#xC218;&#xC5D0;&#xC11C; user &#xAC1D;&#xCCB4;&#xAC00; &#xC815;&#xC758; &#xB418;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC774;&#xB2E4;.
+IsAuthenticatedOrReadOnly &#xB780; &#xB85C;&#xADF8;&#xC778; &#xB41C; user&#xC5D0;&#xAC8C; &#xC4F0;&#xAE30; &#xC77D;&#xAE30; &#xAD8C;&#xD55C;&#xC744; &#xC8FC;&#xACE0; &#xADF8;&#xB807;&#xC9C0; &#xC54A;&#xC744; &#xACBD;&#xC6B0; &#xC77D;&#xAE30; &#xAD8C;&#xD55C;&#xB9CC; &#xC900;&#xB2E4;.</p>
+</blockquote>
+<pre><code class="lang-python+theme:dark+lineNumbers:true"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container" style="border-width: 1px; border-style: solid;"><div class="sunlight-line-number-margin"><a name="sunlight-69-line-1" href="#sunlight-69-line-1">1</a>
+<a name="sunlight-69-line-2" href="#sunlight-69-line-2">2</a>
+<a name="sunlight-69-line-3" href="#sunlight-69-line-3">3</a>
+<a name="sunlight-69-line-4" href="#sunlight-69-line-4">4</a>
+<a name="sunlight-69-line-5" href="#sunlight-69-line-5">5</a>
+<a name="sunlight-69-line-6" href="#sunlight-69-line-6">6</a>
+<a name="sunlight-69-line-7" href="#sunlight-69-line-7">7</a>
+<a name="sunlight-69-line-8" href="#sunlight-69-line-8">8</a>
+<a name="sunlight-69-line-9" href="#sunlight-69-line-9">9</a>
+<a name="sunlight-69-line-10" href="#sunlight-69-line-10">10</a>
+<a name="sunlight-69-line-11" href="#sunlight-69-line-11">11</a>
+<a name="sunlight-69-line-12" href="#sunlight-69-line-12">12</a>
+<a name="sunlight-69-line-13" href="#sunlight-69-line-13">13</a>
+<a name="sunlight-69-line-14" href="#sunlight-69-line-14">14</a>
+<a name="sunlight-69-line-15" href="#sunlight-69-line-15">15</a>
+<a name="sunlight-69-line-16" href="#sunlight-69-line-16">16</a>
+<a name="sunlight-69-line-17" href="#sunlight-69-line-17">17</a>
+<a name="sunlight-69-line-18" href="#sunlight-69-line-18">18</a>
+<a name="sunlight-69-line-19" href="#sunlight-69-line-19">19</a>
+<a name="sunlight-69-line-20" href="#sunlight-69-line-20">20</a>
+<a name="sunlight-69-line-21" href="#sunlight-69-line-21">21</a>
+<a name="sunlight-69-line-22" href="#sunlight-69-line-22">22</a>
+</div><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">generics</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">permissions</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">authentication</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">SessionAuthentication</span>
+
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">models</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">Status</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-delimiter">.</span><span class="sunlight-ident">srializers</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
 
 
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">validate_content</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">value</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-function">len</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">value</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-operator">&gt;</span>&#xA0;<span class="sunlight-number">240</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">serializers</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;is&#xA0;too&#xA0;long.&apos;</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">value</span>
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusAPIView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">generics</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ListCreateAPIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
 
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">validate</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-constant">None</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">permission_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-ident">permissions</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">IsAuthenticatedOrReadOnly</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">authentication_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-ident">SessionAuthentication</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer_class</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
 
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span>&#xA0;<span class="sunlight-keyword">and</span>&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">serializers</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;or&#xA0;image&#xA0;is&#xA0;required.&apos;</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">data</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get_queryset</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">qs</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">objects</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">all</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">query</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">GET</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;q&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">query</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">qs</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">qs</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">filter</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">content__icontains</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">query</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">qs</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">perform_create</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">save</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">)</span>
 </span></pre></div></div></code></pre>
 
                                 
@@ -521,7 +544,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"previous":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/18_Authentication_Permissions.md","mtime":"2018-09-17T13:17:01.667Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:17:26.162Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"previous":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/18_Authentication_Permissions.md","mtime":"2018-09-17T13:45:39.110Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:45:57.693Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
