@@ -1,103 +1,85 @@
-# 13. Mixins to Power Http Methods
+# 15. One API Endpoint for CRUD II
 
->`StatusAPIView(List)`, `StatusCreateAPIView(Create)`
-> `StatusDetailAPIView(Retrieve)`, `StatusUpdateAPIView(Update)`, `StatusDeleteAPIView(Destroy)`
->
-> CRUD API를 구현 하기위해 위의 5개의 View를 구현 했다.
-> 하지만 코드가 비슷하거나 같기도 하다.
-> 그래서 5개의 클래스를 하나로 구현 한다.
+## Install 'requests'
 
-## Create + List
-
-```python
-from rest_framework import mixins
-
-class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
-    permission_classes = []
-    authentication_classes = []
-    serializer_class = StatusSerializer
-
-    def get_queryset(self):
-        qs = Status.objects.all()
-        query = self.request.GET.get('q')
-        if query is not None:
-            qs = qs.filter(content__icontains=query)
-        return qs
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
+```commandline
+pip install requests
 ```
 
-## Detail + Update + Delete (id, pk, slug를 공통으로 필요로 한다.)
+## 외부에서 API 접근 I
 
-```python
-from rest_framework import mixins
+url에 id 정보를 포함해서 접근 한다.
 
-class StatusDetailAPIView(mixins.DestroyModelMixin, mixins.UpdateModelMixin, generics.RetrieveAPIView):
-    permission_classes = []
-    authentication_classes = []
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-    # lookup_field = 'slug'
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+```commandline
+mkdir restapi/scripts
+touch one_endpoints_test.py
 ```
 
-## urls
-
 ```python
-from django.urls import path
+# on_endpoints_test.py
 
-from .views import StatusAPIView, StatusDetailAPIView
+import requests
 
-urlpatterns = [
-    path('', StatusAPIView.as_view()),
-    path('<int:pk>/', StatusDetailAPIView.as_view()),
-]
+def do_one_endpoint(method='get', data={}, id=None):
+    if id is not None:
+        ENDPOINT = 'http://127.0.0.1:8000/api/status/' + '?id=' + str(id)
+    else:
+        ENDPOINT = 'http://127.0.0.1:8000/api/status/'
+    r = requests.request(method, ENDPOINT, data=data)
+    print(r.text)
+    return r
+
+do_one_endpoint(id=11)
+# [{"id":8,"user":1,"content":"Update","image":null},{"id":11,"user":1,"content":"아아아아아","image":null}]
 ```
 
-## Test1
+## 외부에서 API 접근 II
 
-<http://127.0.0.1:8000/api/status/>
-
-<http://127.0.0.1:8000/api/status/8>
-
-## Create + List = ListCreateAPIView
+data에 id 정보를 포함해서 접근 한다.
 
 ```python
-class StatusAPIView(generics.ListCreateAPIView):
-    permission_classes = []
-    authentication_classes = []
-    serializer_class = StatusSerializer
+# views.py
 
-    def get_queryset(self):
-        qs = Status.objects.all()
-        query = self.request.GET.get('q')
-        if query is not None:
-            qs = qs.filter(content__icontains=query)
-        return qs
+import json
+...
+def get(self, request, *args, **kwargs):
+    url_passed_id = request.GET.get('id', None)
+    json_data = json.loads(request.body)
+    data_passed_id = json_data.get('id', None)
+    passed_id = url_passed_id or data_passed_id or None
+    print(passed_id)
+    if passed_id is not None:
+        self.retrieve(request, *args, **kwargs)
+    return super().get(request, *args, **kwargs)
 ```
-
-## Detail + Update + Delete = RetrieveUpdateDestroyAPIView
 
 ```python
-class StatusDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = []
-    authentication_classes = []
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-    # lookup_field = 'slug'
+# on_endpoints_test.py
+
+import requests
+import json
+
+def do_one_endpoint(method='get', data={}, id=None, is_json=True):
+    if is_json:
+        data = json.dumps(data)
+    if id is not None:
+        ENDPOINT = 'http://127.0.0.1:8000/api/status/' + '?id=' + str(id)
+    else:
+        ENDPOINT = 'http://127.0.0.1:8000/api/status/'
+    r = requests.request(method, ENDPOINT, data=data)
+    print(r.text)
+    return r
+
+
+do_one_endpoint(id=11)  # url_passed_id
+do_one_endpoint(data={'id': 8})  # data_passed_id
+do_one_endpoint(data={'id': 8}, id=11)  # url_passed_id & data_passed_id
+
+# [{"id":8,"user":1,"content":"Update","image":null},{"id":11,"user":1,"content":"아아아아아","image":null}]
+# [{"id":8,"user":1,"content":"Update","image":null},{"id":11,"user":1,"content":"아아아아아","image":null}]
+# [{"id":8,"user":1,"content":"Update","image":null},{"id":11,"user":1,"content":"아아아아아","image":null}]
+
+# 11
+# 8
+# 11
 ```
-
-## Test2
-
-<http://127.0.0.1:8000/api/status/>
-
-<http://127.0.0.1:8000/api/status/8>
