@@ -1,5 +1,5 @@
 {
-    "plugins": ["ga", "-highlight", "sunlight-highlighter", "code-highlighter"],
+    "plugins": ["ga", "-highlight", "sunlight-highlighter"],
     "pluginsConfig": {
         "ga": {
             "token": "UA-123456-1"
