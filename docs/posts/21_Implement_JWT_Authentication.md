@@ -77,15 +77,13 @@ import requests
 
 AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/jwt/'
 REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
-ENDPOINT = 'http://127.0.0.1:8000/api/status/'
-image_path = 'd:/mai.jpg'
 
 headers = {
     'Content-Type': 'application/json'
 }
 
 # Get Toke
-data = {'username': 'admin', 'password': '1004kgm44'}
+data = {'username': 'admin', 'password': '********'}
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 token = r.json()['token']
