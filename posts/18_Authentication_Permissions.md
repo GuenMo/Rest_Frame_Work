@@ -4,7 +4,7 @@
 
 > 페이지에 로그인 한 유저의 이름을 알아 낸다.
 
-```python+theme:gitbook+lineNumbers:true
+```python+theme:dark+lineNumbers:true
 # views.py
 
 from rest_framework.authentication import SessionAuthentication
