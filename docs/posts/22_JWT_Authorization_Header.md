@@ -1,4 +1,4 @@
-# 21. Implement JWT Authentication
+# 22. JWT Authorization Header
 
 ## Installation
 

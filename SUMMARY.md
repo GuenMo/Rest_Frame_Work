@@ -21,3 +21,4 @@
 - [19. Global Settings for Authentication Permissions](posts/19_Global_Settings_for_Authentication_Permissions.md)
 - [20. Permission Tests with Python Requests](posts/20_Permission_Tests_with_Python_Requests.md)
 - [21. Implement JWT Authentication](posts/21_Implement_JWT_Authentication.md)
+- [22. JWT Authorization Header](posts/22_JWT_Authorization_Header.md)

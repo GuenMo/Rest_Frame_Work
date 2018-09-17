@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>21. Implement JWT Authentication · GitBook</title>
+        <title>22. JWT Authorization Header · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="22_JWT_Authorization_Header.html" />
     
-    
-    <link rel="prev" href="20_Permission_Tests_with_Python_Requests.html" />
+    <link rel="prev" href="21_Implement_JWT_Authentication.html" />
     
 
     </head>
@@ -349,7 +347,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.21" data-path="21_Implement_JWT_Authentication.html">
+        <li class="chapter " data-level="1.21" data-path="21_Implement_JWT_Authentication.html">
             
                 <a href="21_Implement_JWT_Authentication.html">
             
@@ -362,7 +360,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.22" data-path="22_JWT_Authorization_Header.html">
+        <li class="chapter active" data-level="1.22" data-path="22_JWT_Authorization_Header.html">
             
                 <a href="22_JWT_Authorization_Header.html">
             
@@ -405,7 +403,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >21. Implement JWT Authentication</a>
+        <a href=".." >22. JWT Authorization Header</a>
     </h1>
 </div>
 
@@ -420,7 +418,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="21-implement-jwt-authentication">21. Implement JWT Authentication</h1>
+                                <h1 id="22-jwt-authorization-header">22. JWT Authorization Header</h1>
 <h2 id="installation">Installation</h2>
 <pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">pip&#xA0;install&#xA0;djangorestframework-jwt
 </span></pre></div></div></code></pre>
@@ -532,14 +530,10 @@
 
             
                 
-                <a href="20_Permission_Tests_with_Python_Requests.html" class="navigation navigation-prev " aria-label="Previous page: 20. Permission Tests with Python Requests">
+                <a href="21_Implement_JWT_Authentication.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 21. Implement JWT Authentication">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="22_JWT_Authorization_Header.html" class="navigation navigation-next " aria-label="Next page: 22. JWT Authorization Header">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -548,7 +542,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"21. Implement JWT Authentication","level":"1.21","depth":1,"next":{"title":"22. JWT Authorization Header","level":"1.22","depth":1,"path":"posts/22_JWT_Authorization_Header.md","ref":"posts/22_JWT_Authorization_Header.md","articles":[]},"previous":{"title":"20. Permission Tests with Python Requests","level":"1.20","depth":1,"path":"posts/20_Permission_Tests_with_Python_Requests.md","ref":"posts/20_Permission_Tests_with_Python_Requests.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/21_Implement_JWT_Authentication.md","mtime":"2018-09-17T17:47:33.184Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T17:49:52.301Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"22. JWT Authorization Header","level":"1.22","depth":1,"previous":{"title":"21. Implement JWT Authentication","level":"1.21","depth":1,"path":"posts/21_Implement_JWT_Authentication.md","ref":"posts/21_Implement_JWT_Authentication.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/22_JWT_Authorization_Header.md","mtime":"2018-09-17T17:48:52.835Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T17:49:52.301Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
