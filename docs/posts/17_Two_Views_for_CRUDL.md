@@ -36,7 +36,7 @@ class StatusDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = StatusSerializer
 ```
 
-## 외부에서 API 접근
+## API 접근 함수 구현
 
 ```python
 # status/models.py
@@ -60,8 +60,6 @@ if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
 
-## Create
-
 ```python
 import json
 import requests
@@ -80,7 +78,11 @@ def do_img(method='get', data={}, image_path=None, endpoint=None):
     print(r.text)
     print(r.status_code)
     return r
+```
 
+## Create
+
+```python
 # Create
 ENDPOINT = 'http://127.0.0.1:8000/api/status/'
 data = {'user': 1, 'content': 'Create from external python'}

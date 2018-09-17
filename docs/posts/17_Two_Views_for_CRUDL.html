@@ -384,7 +384,7 @@
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
 </code></pre>
-<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC;</h2>
+<h2 id="api-&#xC811;&#xADFC;-&#xD568;&#xC218;-&#xAD6C;&#xD604;">API &#xC811;&#xADFC; &#xD568;&#xC218; &#xAD6C;&#xD604;</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># status/models.py</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_status_image</span><span class="hljs-params">(instance, filename)</span>:</span>
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;status/{user}/{filename}&quot;</span>.format(user=instance.user, filename=filename)
@@ -401,7 +401,6 @@ MEDIA_URL = <span class="hljs-string">&apos;/media/&apos;</span>
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 </code></pre>
-<h2 id="create">Create</h2>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> requests
 
@@ -419,8 +418,9 @@ MEDIA_URL = <span class="hljs-string">&apos;/media/&apos;</span>
     print(r.text)
     print(r.status_code)
     <span class="hljs-keyword">return</span> r
-
-<span class="hljs-comment"># Create</span>
+</code></pre>
+<h2 id="create">Create</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># Create</span>
 ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
 data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Create from external python&apos;</span>}
 image_path = <span class="hljs-string">&apos;d:/mai.jpg&apos;</span>
@@ -493,7 +493,7 @@ do_img(method=<span class="hljs-string">&apos;delete&apos;</span>, endpoint=ENDP
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"previous":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/17_Two_Views_for_CRUDL.md","mtime":"2018-09-17T12:05:18.368Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:05:25.613Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"previous":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/17_Two_Views_for_CRUDL.md","mtime":"2018-09-17T12:07:40.399Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:07:47.464Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
