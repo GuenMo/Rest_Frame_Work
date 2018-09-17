@@ -15,3 +15,5 @@
 - [13. Mixin to Power Http Methods](posts/13_Mixins_to_Power_Http_Methods.md)
 - [14. One API Endpoint for CRUD Part I](posts/14_One_API_Endpoint_for_CRUD_Part_1.md)
 - [15. One API Endpoint for CRUD Part II](posts/15_One_API_Endpoint_for_CRUD_Part_2.md)
+- [16. Uploading & Handling Images](posts/16_Uploading_Handling_Images.md)
+- [17. Two Views for CRUDL](posts/17_Two_Views_for_CRUDL.md)
