@@ -373,6 +373,59 @@ MEDIA_URL = <span class="hljs-string">&apos;/media/&apos;</span>
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 </code></pre>
+<h2 id="create">Create</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> requests
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_img</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, image_path=None, endpoint=None)</span>:</span>
+    headers = {}
+    <span class="hljs-keyword">if</span> image_path <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        <span class="hljs-keyword">with</span> open(image_path, <span class="hljs-string">&apos;rb&apos;</span>) <span class="hljs-keyword">as</span> image:
+            file_data = {<span class="hljs-string">&apos;image&apos;</span>: image}
+            r = requests.request(method, endpoint, data=data, headers=headers, files=file_data)
+    <span class="hljs-keyword">else</span>:
+        headers[<span class="hljs-string">&apos;content-type&apos;</span>] = <span class="hljs-string">&apos;application/json&apos;</span>
+        data = json.dumps(data)
+        r = requests.request(method, endpoint, data=data, headers=headers)
+    print(r.text)
+    print(r.status_code)
+    <span class="hljs-keyword">return</span> r
+
+<span class="hljs-comment"># Create</span>
+ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Create from external python&apos;</span>}
+image_path = <span class="hljs-string">&apos;d:/mai.jpg&apos;</span>
+
+<span class="hljs-comment"># 1. No image</span>
+do_img(method=<span class="hljs-string">&apos;post&apos;</span>, data=data, endpoint=ENDPOINT)
+<span class="hljs-comment"># 2. With image</span>
+do_img(method=<span class="hljs-string">&apos;post&apos;</span>, data=data, image_path=image_path, endpoint=ENDPOINT)
+</code></pre>
+<h2 id="list">List</h2>
+<pre><code class="lang-python">ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+do_img(method=<span class="hljs-string">&apos;get&apos;</span>, endpoint=ENDPOINT)
+</code></pre>
+<h2 id="detail">Detail</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># Detail</span>
+ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+do_img(method=<span class="hljs-string">&apos;get&apos;</span>, endpoint=ENDPOINT)
+</code></pre>
+<h2 id="update">Update</h2>
+<pre><code class="lang-python">ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Updata from external python with image.&apos;</span>}
+image_path = <span class="hljs-string">&apos;d:/astellia.jpg&apos;</span>
+
+<span class="hljs-comment"># 1. No image</span>
+do_img(method=<span class="hljs-string">&apos;put&apos;</span>, data=data, endpoint=ENDPOINT)
+<span class="hljs-comment"># 2. With image</span>
+do_img(method=<span class="hljs-string">&apos;put&apos;</span>, data=data, image_path=image_path, endpoint=ENDPOINT)
+</code></pre>
+<h2 id="delete">Delete</h2>
+<pre><code class="lang-python"><span class="hljs-comment"># Delete</span>
+ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+do_img(method=<span class="hljs-string">&apos;delete&apos;</span>, endpoint=ENDPOINT)
+</code></pre>
 
                                 
                                 </section>
@@ -416,7 +469,7 @@ MEDIA_URL = <span class="hljs-string">&apos;/media/&apos;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"next":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"previous":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","ref":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/16_Uploading_Handling_Images.md","mtime":"2018-09-17T09:52:28.796Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T09:52:35.254Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"next":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"previous":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","ref":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/16_Uploading_Handling_Images.md","mtime":"2018-09-17T12:03:23.003Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:03:33.916Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
