@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="20_Permission_Tests_with_Python_Requests.html" />
+    
     
     <link rel="prev" href="18_Authentication_Permissions.html" />
     
@@ -334,6 +336,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.20" data-path="20_Permission_Tests_with_Python_Requests.html">
+            
+                <a href="20_Permission_Tests_with_Python_Requests.html">
+            
+                    
+                    20. Permission Tests with Python Requests
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -380,6 +395,35 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="19-global-settings-for-authentication-permissions">19. Global Settings for Authentication Permissions</h1>
+<blockquote>
+<p>permission_classes, authentication_classes &#xC758; &#xC14B;&#xD305; &#xD30C;&#xC77C;&#xC744; &#xB9CC;&#xB4E0;&#xB2E4;.</p>
+</blockquote>
+<h2 id="&#xD3F4;&#xB354;-&#xBC0F;-&#xD30C;&#xC77C;-&#xC0DD;&#xC131;">&#xD3F4;&#xB354; &#xBC0F; &#xD30C;&#xC77C; &#xC0DD;&#xC131;</h2>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">mkdir&#xA0;restapi/mysite/restconf
+
+touch&#xA0;restapi/mysite/restconf/__init__.py
+touch&#xA0;restapi/mysite/restconf/main.py
+</span></pre></div></div></code></pre>
+<h2 id="main-setting-&#xD30C;&#xC77C;-&#xB85C;&#xB4DC;">main setting &#xD30C;&#xC77C; &#xB85C;&#xB4DC;</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;settins.py</span>
+
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">mysite</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">restconf</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">main</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-operator">*</span>
+</span></pre></div></div></code></pre>
+<h2 id="default-settings">Default settings</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-ident">REST_FRAMEWORK</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;DEFAULT_AUTHENTICATION_CLASSES&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-delimiter">(</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;&apos;rest_framework.authentication.BasicAuthentication&apos;,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework.authentication.SessionAuthentication&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;DEFAULT_PERMISSION_CLASSES&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-delimiter">(</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework.permissions.IsAuthenticatedOrReadOnly&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+<span class="sunlight-delimiter">}</span>
+</span></pre></div></div></code></pre>
+<h2 id="view-&#xD655;&#xC778;">View &#xD655;&#xC778;</h2>
+<blockquote>
+<p>&#xBAA8;&#xB4E0; api &#xC758; views &#xD30C;&#xC77C;&#xC5D0;&#xC11C; permission_classes, authentication_classes &#xC8FC;&#xC11D; &#xCC98;&#xB9AC; &#xD55C;&#xB2E4;.</p>
+</blockquote>
 
                                 
                                 </section>
@@ -407,10 +451,14 @@
 
             
                 
-                <a href="18_Authentication_Permissions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 18. Authentication & Permissions">
+                <a href="18_Authentication_Permissions.html" class="navigation navigation-prev " aria-label="Previous page: 18. Authentication & Permissions">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="20_Permission_Tests_with_Python_Requests.html" class="navigation navigation-next " aria-label="Next page: 20. Permission Tests with Python Requests">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -419,7 +467,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"19. Global Settings for Authentication Permissions","level":"1.19","depth":1,"previous":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"path":"posts/18_Authentication_Permissions.md","ref":"posts/18_Authentication_Permissions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/19_Global_Settings_for_Authentication_Permissions.md","mtime":"2018-09-17T13:50:27.949Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:51:28.973Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"19. Global Settings for Authentication Permissions","level":"1.19","depth":1,"next":{"title":"20. Permission Tests with Python Requests","level":"1.20","depth":1,"path":"posts/20_Permission_Tests_with_Python_Requests.md","ref":"posts/20_Permission_Tests_with_Python_Requests.md","articles":[]},"previous":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"path":"posts/18_Authentication_Permissions.md","ref":"posts/18_Authentication_Permissions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/19_Global_Settings_for_Authentication_Permissions.md","mtime":"2018-09-17T14:13:07.980Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T14:14:52.569Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
