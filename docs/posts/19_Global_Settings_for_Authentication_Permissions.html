@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>8. API Endpoints Overview · GitBook</title>
+        <title>19. Global Settings for Authentication Permissions · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="09_List_Search_API_View.html" />
     
-    
-    <link rel="prev" href="07_Validation_Fields.html" />
+    <link rel="prev" href="18_Authentication_Permissions.html" />
     
 
     </head>
@@ -180,7 +178,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="08_API_Endpoints_Overview.html">
+        <li class="chapter " data-level="1.8" data-path="08_API_Endpoints_Overview.html">
             
                 <a href="08_API_Endpoints_Overview.html">
             
@@ -323,7 +321,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.19" data-path="19_Global_Settings_for_Authentication_Permissions.html">
+        <li class="chapter active" data-level="1.19" data-path="19_Global_Settings_for_Authentication_Permissions.html">
             
                 <a href="19_Global_Settings_for_Authentication_Permissions.html">
             
@@ -366,7 +364,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >8. API Endpoints Overview</a>
+        <a href=".." >19. Global Settings for Authentication Permissions</a>
     </h1>
 </div>
 
@@ -381,25 +379,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="8-api-endpoint-overview">8. API Endpoint Overview</h1>
-<h2 id="url-&#xCD94;&#xAC00;">url &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/urls.py</span>
-
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">contrib</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">admin</span>
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span>
-
-<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;admin/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">admin</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">site</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/status/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;status.api.urls&apos;</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-<span class="sunlight-delimiter">]</span>
-</span></pre></div></div></code></pre>
-<h2 id="view--url-&#xC0DD;&#xC131;">View &amp; Url &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">touch&#xA0;status/api/views.py
-touch&#xA0;status/api/urls.py
-</span></pre></div></div></code></pre>
-<ol>
-<li>Create, Retrive, Update, Delete 4&#xAC1C; view&#xB97C; &#xB9CC;&#xB4E0;&#xB2E4;.</li>
-</ol>
+                                <h1 id="19-global-settings-for-authentication-permissions">19. Global Settings for Authentication Permissions</h1>
 
                                 
                                 </section>
@@ -427,14 +407,10 @@ touch&#xA0;status/api/urls.py
 
             
                 
-                <a href="07_Validation_Fields.html" class="navigation navigation-prev " aria-label="Previous page: 7. Validation & Fields">
+                <a href="18_Authentication_Permissions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 18. Authentication & Permissions">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="09_List_Search_API_View.html" class="navigation navigation-next " aria-label="Next page: 9. List & Search API View">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -443,7 +419,7 @@ touch&#xA0;status/api/urls.py
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"8. API Endpoints Overview","level":"1.8","depth":1,"next":{"title":"9. List & Search API View","level":"1.9","depth":1,"path":"posts/09_List_Search_API_View.md","ref":"posts/09_List_Search_API_View.md","articles":[]},"previous":{"title":"7. Validation & Fields","level":"1.7","depth":1,"path":"posts/07_Validation_Fields.md","ref":"posts/07_Validation_Fields.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/08_API_Endpoints_Overview.md","mtime":"2018-09-13T10:38:17.025Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:51:28.973Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"19. Global Settings for Authentication Permissions","level":"1.19","depth":1,"previous":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"path":"posts/18_Authentication_Permissions.md","ref":"posts/18_Authentication_Permissions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/19_Global_Settings_for_Authentication_Permissions.md","mtime":"2018-09-17T13:50:27.949Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:51:28.973Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
