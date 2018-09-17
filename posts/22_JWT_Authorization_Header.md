@@ -1,74 +1,5 @@
 # 22. JWT Authorization Header
 
-## Installation
-
-```commandline
-pip install djangorestframework-jwt
-```
-
-## Usage
-
-```python
-# mysite/restconf/main.py
-
-from datetime import datetime
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
-}
-
-JWT_AUTH = {
-    'JWT_ENCODE_HANDLER':
-    'rest_framework_jwt.utils.jwt_encode_handler',
-
-    'JWT_DECODE_HANDLER':
-    'rest_framework_jwt.utils.jwt_decode_handler',
-
-    'JWT_PAYLOAD_HANDLER':
-    'rest_framework_jwt.utils.jwt_payload_handler',
-
-    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
-    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
-
-    'JWT_RESPONSE_PAYLOAD_HANDLER':
-    'rest_framework_jwt.utils.jwt_response_payload_handler',
-
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-
-    'JWT_AUTH_HEADER_PREFIX': 'JWT',
-    'JWT_AUTH_COOKIE': None,
-}
-```
-
-```python
-# mysite/urls.py
-
-...
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/auth/jwt/', obtain_jwt_token),
-    path('api/auth/jwt/refresh/', refresh_jwt_token),
-    path('api/status/', include('status.api.urls')),
-]
-...
-```
-
-## Test
-
-<http://127.0.0.1:8000/api/auth/jwt/>
-
-> username, password 입력하고 **post** 클릭 하면 token이 만들어 진다.
-
 ## API Test
 
 ```python
@@ -77,21 +8,66 @@ import requests
 
 AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/jwt/'
 REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
+ENDPOINT = 'http://127.0.0.1:8000/api/status/'
+image_path = 'd:/mai.jpg'
 
 headers = {
     'Content-Type': 'application/json'
 }
 
-# Get Toke
-data = {'username': 'admin', 'password': '********'}
+# Get Token
+data = {'username': 'admin', 'password': '1004kgm44'}
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 token = r.json()['token']
 print(token)
 
-refresh_data = {'token': token}
 
-new_r = requests.post(REFRESH_ENDPOINT, data=json.dumps(refresh_data), headers=headers)
-new_token = new_r.json()['token']
-print(new_token)
+# Retrieve
+# 1. List
+headers = {'Authorization': 'JWT ' + token}
+list_r = requests.get(ENDPOINT, headers=headers)
+print(list_r.text)
+# 2. Detail
+headers = {'Authorization': 'JWT ' + token}
+detail_r = requests.get(ENDPOINT + str(36) + '/', headers=headers)
+print(detail_r.text)
+
+# Create
+# 1. No image
+headers = {'Authorization': 'JWT ' + token}
+post_data = {'content': 'Create from API using token'}
+
+post_r = requests.post(ENDPOINT, data=post_data, headers=headers)
+print(post_r.text)
+
+# 2. With image
+headers = {'Authorization': 'JWT ' + token}
+post_data = {'content': 'Create from API using token with image.'}
+
+with open(image_path, 'rb') as image:
+    file_data = {'image': image}
+    post_r = requests.post(ENDPOINT, data=post_data, headers=headers, files=file_data)
+
+# Update
+# 1. No image
+headers = {'Authorization': 'JWT ' + token}
+update_data = {'content': 'Update from API using token'}
+
+update_r = requests.put(ENDPOINT + str(37) + '/', data=update_data, headers=headers)
+print(update_r.text)
+
+# 2. With image
+headers = {'Authorization': 'JWT ' + token}
+update_data = {'content': 'Update from API using token with image'}
+
+with open(image_path, 'rb') as image:
+    file_data = {'image': image}
+    update_r = requests.put(ENDPOINT + str(36) + '/', data=update_data, headers=headers, files=file_data)
+print(update_r.text)
+
+# Delete
+headers = {'Authorization': 'JWT ' + token}
+delete_r = requests.delete(ENDPOINT + str(36) + '/', headers=headers)
+print(delete_r.status_code)
 ```
