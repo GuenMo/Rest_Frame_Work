@@ -6,7 +6,7 @@
 pip install requests
 ```
 
-## 테스트 스크립트 파일 
+## 테스트 스크립트 파일
 
 ```commandline
 mkdir restapi/scripts
