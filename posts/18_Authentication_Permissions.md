@@ -8,7 +8,7 @@
 # views.py
 
 from rest_framework.authentication import SessionAuthentication
-...
+
 class StatusAPIView(generics.ListCreateAPIView):
 
     permission_classes = []
