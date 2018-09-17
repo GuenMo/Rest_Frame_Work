@@ -7,7 +7,7 @@
 > 하지만 코드가 비슷하거나 같기도 하다.
 > 그래서 5개의 클래스를 하나로 구현 한다.
 
-## Create + List
+## One API Endpoint for CRUD
 
 ```python
 from rest_framework import generics
