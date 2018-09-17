@@ -1,6 +1,6 @@
 # 22. JWT Authorization Header
 
-## API Test
+## Get Token
 
 ```python
 import json
@@ -21,9 +21,11 @@ data = {'username': 'admin', 'password': '1004kgm44'}
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 token = r.json()['token']
 print(token)
+```
 
+## Retrieve
 
-# Retrieve
+```python
 # 1. List
 headers = {'Authorization': 'JWT ' + token}
 list_r = requests.get(ENDPOINT, headers=headers)
@@ -32,8 +34,11 @@ print(list_r.text)
 headers = {'Authorization': 'JWT ' + token}
 detail_r = requests.get(ENDPOINT + str(36) + '/', headers=headers)
 print(detail_r.text)
+```
 
-# Create
+## Create
+
+```python
 # 1. No image
 headers = {'Authorization': 'JWT ' + token}
 post_data = {'content': 'Create from API using token'}
@@ -48,8 +53,11 @@ post_data = {'content': 'Create from API using token with image.'}
 with open(image_path, 'rb') as image:
     file_data = {'image': image}
     post_r = requests.post(ENDPOINT, data=post_data, headers=headers, files=file_data)
+```
 
-# Update
+## Update
+
+```python
 # 1. No image
 headers = {'Authorization': 'JWT ' + token}
 update_data = {'content': 'Update from API using token'}
@@ -65,8 +73,11 @@ with open(image_path, 'rb') as image:
     file_data = {'image': image}
     update_r = requests.put(ENDPOINT + str(36) + '/', data=update_data, headers=headers, files=file_data)
 print(update_r.text)
+```
 
-# Delete
+## Delete
+
+```python
 headers = {'Authorization': 'JWT ' + token}
 delete_r = requests.delete(ENDPOINT + str(36) + '/', headers=headers)
 print(delete_r.status_code)
