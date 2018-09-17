@@ -7,7 +7,7 @@
         "sunlight-highlighter": {
             "theme": "dark",
             "lineNumber": true
-          }
+        }
     },
     "variables": {
         "BASE_URL": "https://guenmo.github.io/GuenMo/Rest_Frame_Work"
