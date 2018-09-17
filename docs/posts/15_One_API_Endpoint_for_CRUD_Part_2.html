@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>4. Model Form for Validation · GitBook</title>
+        <title>15. One API Endpoint for CRUD Part II · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="05_Creating_a_Serializer.html" />
     
-    
-    <link rel="prev" href="03_Status_Model_App.html" />
+    <link rel="prev" href="14_One_API_Endpoint_for_CRUD_Part_1.html" />
     
 
     </head>
@@ -128,7 +126,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="04_Model_From_for_Validation.html">
+        <li class="chapter " data-level="1.4" data-path="04_Model_From_for_Validation.html">
             
                 <a href="04_Model_From_for_Validation.html">
             
@@ -271,7 +269,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="15_One_API_Endpoint_for_CRUD_Part_2.html">
+        <li class="chapter active" data-level="1.15" data-path="15_One_API_Endpoint_for_CRUD_Part_2.html">
             
                 <a href="15_One_API_Endpoint_for_CRUD_Part_2.html">
             
@@ -314,7 +312,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >4. Model Form for Validation</a>
+        <a href=".." >15. One API Endpoint for CRUD Part II</a>
     </h1>
 </div>
 
@@ -329,54 +327,75 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="4-model-form-for-validation">4. Model Form for Validation</h1>
-<h2 id="forms">Forms</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/forms.py</span>
-
-<span class="hljs-keyword">from</span> django <span class="hljs-keyword">import</span> forms
-
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Status
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusForm</span><span class="hljs-params">(forms.ModelForm)</span>:</span>
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>
-        model = Status
-        fields = [
-            <span class="hljs-string">&apos;user&apos;</span>,
-            <span class="hljs-string">&apos;content&apos;</span>,
-            <span class="hljs-string">&apos;image&apos;</span>
-        ]
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clean_content</span><span class="hljs-params">(self, *args, **kwargs)</span>:</span>
-        content = self.cleaned_data.get(<span class="hljs-string">&apos;content&apos;</span>)
-        <span class="hljs-keyword">if</span> len(content) &gt; <span class="hljs-number">240</span>:
-            <span class="hljs-keyword">raise</span> forms.ValidationError(<span class="hljs-string">&apos;Content is too long.&apos;</span>)
-        <span class="hljs-keyword">return</span> content
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clean</span><span class="hljs-params">(self, *args, **kwargs)</span>:</span>
-        data = self.cleaned_data
-        content = data.get(<span class="hljs-string">&apos;content&apos;</span>, <span class="hljs-keyword">None</span>)
-        <span class="hljs-keyword">if</span> content == <span class="hljs-string">&apos;&apos;</span>:
-            content = <span class="hljs-keyword">None</span>
-
-        image = data.get(<span class="hljs-string">&apos;image&apos;</span>, <span class="hljs-keyword">None</span>)
-        <span class="hljs-keyword">if</span> content <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span> <span class="hljs-keyword">and</span> image <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
-            <span class="hljs-keyword">raise</span> forms.ValidationError(<span class="hljs-string">&apos;Content or image is required.&apos;</span>)
-        <span class="hljs-keyword">return</span> super().clean(*args, **kwargs)
+                                <h1 id="15-one-api-endpoint-for-crud-ii">15. One API Endpoint for CRUD II</h1>
+<h2 id="install-requests">Install &apos;requests&apos;</h2>
+<pre><code class="lang-commandline">pip install requests
 </code></pre>
-<h2 id="admin-page-form-&#xCD94;&#xAC00;">Admin page form &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-i">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; I</h2>
+<p>url&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
+<pre><code class="lang-commandline">mkdir restapi/scripts
+touch one_endpoints_test.py
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
 
-<span class="hljs-keyword">from</span> .forms <span class="hljs-keyword">import</span> StatusForm
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Status
+<span class="hljs-keyword">import</span> requests
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None)</span>:</span>
+    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
+    <span class="hljs-keyword">else</span>:
+        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+    r = requests.request(method, ENDPOINT, data=data)
+    print(r.text)
+    <span class="hljs-keyword">return</span> r
+
+do_one_endpoint(id=<span class="hljs-number">11</span>)
+<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+</code></pre>
+<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-ii">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; II</h2>
+<p>data&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
+<pre><code class="lang-python"><span class="hljs-comment"># views.py</span>
+
+<span class="hljs-keyword">import</span> json
+...
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+    url_passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
+    json_data = json.loads(request.body)
+    data_passed_id = json_data.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
+    passed_id = url_passed_id <span class="hljs-keyword">or</span> data_passed_id <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
+    print(passed_id)
+    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        self.retrieve(request, *args, **kwargs)
+    <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
+
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None, is_json=True)</span>:</span>
+    <span class="hljs-keyword">if</span> is_json:
+        data = json.dumps(data)
+    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
+    <span class="hljs-keyword">else</span>:
+        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+    r = requests.request(method, ENDPOINT, data=data)
+    print(r.text)
+    <span class="hljs-keyword">return</span> r
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusAdmin</span><span class="hljs-params">(admin.ModelAdmin)</span>:</span>
-    list_display = [<span class="hljs-string">&apos;user&apos;</span>, <span class="hljs-string">&apos;__str__&apos;</span>, <span class="hljs-string">&apos;image&apos;</span>]
-    form = StatusForm
+do_one_endpoint(id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id</span>
+do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>})  <span class="hljs-comment"># data_passed_id</span>
+do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>}, id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id &amp; data_passed_id</span>
 
+<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
 
-admin.site.register(Status, StatusAdmin)
+<span class="hljs-comment"># 11</span>
+<span class="hljs-comment"># 8</span>
+<span class="hljs-comment"># 11</span>
 </code></pre>
 
                                 
@@ -405,14 +424,10 @@ admin.site.register(Status, StatusAdmin)
 
             
                 
-                <a href="03_Status_Model_App.html" class="navigation navigation-prev " aria-label="Previous page: 3. Status Model & App">
+                <a href="14_One_API_Endpoint_for_CRUD_Part_1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 14. One API Endpoint for CRUD Part I">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="05_Creating_a_Serializer.html" class="navigation navigation-next " aria-label="Next page: 5. Creating a Serializer">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -421,7 +436,7 @@ admin.site.register(Status, StatusAdmin)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4. Model Form for Validation","level":"1.4","depth":1,"next":{"title":"5. Creating a Serializer","level":"1.5","depth":1,"path":"posts/05_Creating_a_Serializer.md","ref":"posts/05_Creating_a_Serializer.md","articles":[]},"previous":{"title":"3. Status Model & App","level":"1.3","depth":1,"path":"posts/03_Status_Model_App.md","ref":"posts/03_Status_Model_App.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/04_Model_From_for_Validation.md","mtime":"2018-09-13T10:05:44.273Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T06:53:51.382Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"previous":{"title":"14. One API Endpoint for CRUD Part I","level":"1.14","depth":1,"path":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","ref":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","mtime":"2018-09-17T06:52:54.495Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T06:53:51.382Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
