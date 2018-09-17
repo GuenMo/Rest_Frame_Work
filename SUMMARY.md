@@ -17,3 +17,4 @@
 - [15. One API Endpoint for CRUD Part II](posts/15_One_API_Endpoint_for_CRUD_Part_2.md)
 - [16. Uploading & Handling Images](posts/16_Uploading_Handling_Images.md)
 - [17. Two Views for CRUDL](posts/17_Two_Views_for_CRUDL.md)
+- [18. Authentication & Permissions](posts/18_Authentication_Permissions.md)
