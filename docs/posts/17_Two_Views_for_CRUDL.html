@@ -354,113 +354,40 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="17-two-views-for-crudl">17. Two Views for CRUDL</h1>
-<h2 id="install-requests">Install &apos;requests&apos;</h2>
-<pre><code class="lang-commandline">pip install requests
-</code></pre>
-<h2 id="&#xD14C;&#xC2A4;&#xD2B8;-&#xC2A4;&#xD06C;&#xB9BD;&#xD2B8;-&#xD30C;&#xC77C;">&#xD14C;&#xC2A4;&#xD2B8; &#xC2A4;&#xD06C;&#xB9BD;&#xD2B8; &#xD30C;&#xC77C;</h2>
-<pre><code class="lang-commandline">mkdir restapi/scripts
-touch one_endpoints_test.py
-</code></pre>
-<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-i">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; I</h2>
-<p>url&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
-<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
-
-<span class="hljs-keyword">import</span> requests
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None)</span>:</span>
-    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
-    <span class="hljs-keyword">else</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
-
-do_one_endpoint(id=<span class="hljs-number">11</span>)
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-</code></pre>
-<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-ii">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; II</h2>
-<p>data&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
+<h2 id="list--create-view">List &amp; Create View</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># views.py</span>
 
-<span class="hljs-keyword">import</span> json
-...
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
-    url_passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    json_data = json.loads(request.body)
-    data_passed_id = json_data.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    passed_id = url_passed_id <span class="hljs-keyword">or</span> data_passed_id <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
-    print(passed_id)
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        self.retrieve(request, *args, **kwargs)
-    <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
+<span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> generics
+<span class="hljs-keyword">from</span> status.models <span class="hljs-keyword">import</span> Status
+<span class="hljs-keyword">from</span> .srializers <span class="hljs-keyword">import</span> StatusSerializer
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusAPIView</span><span class="hljs-params">(generics.ListCreateAPIView)</span>:</span>
+
+    permission_classes = []
+    authentication_classes = []
+    serializer_class = StatusSerializer
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        qs = Status.objects.all()
+        query = self.request.GET.get(<span class="hljs-string">&apos;q&apos;</span>)
+        <span class="hljs-keyword">if</span> query <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            qs = qs.filter(content__icontains=query)
+        <span class="hljs-keyword">return</span> qs
 </code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
-
-<span class="hljs-keyword">import</span> requests
-<span class="hljs-keyword">import</span> json
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None, is_json=True)</span>:</span>
-    <span class="hljs-keyword">if</span> is_json:
-        data = json.dumps(data)
-    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
-    <span class="hljs-keyword">else</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
-
-
-do_one_endpoint(id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id</span>
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>})  <span class="hljs-comment"># data_passed_id</span>
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>}, id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id &amp; data_passed_id</span>
-
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-
-<span class="hljs-comment"># 11</span>
-<span class="hljs-comment"># 8</span>
-<span class="hljs-comment"># 11</span>
-</code></pre>
-<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-iii">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; III</h2>
-<p>data&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
+<h2 id="retreive--upload--delete-view">Retreive &amp; Upload &amp; Delete View</h2>
 <pre><code class="lang-python"><span class="hljs-comment"># views.py</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_object</span><span class="hljs-params">(self)</span>:</span>
-    request = self.request
-    passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>) <span class="hljs-keyword">or</span> self.passed_id
-    queryset = self.get_queryset()
-    obj = <span class="hljs-keyword">None</span>
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        obj = get_object_or_404(queryset, id=passed_id)
-        self.check_object_permissions(request, obj)
-    <span class="hljs-keyword">return</span> obj
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
-    url_passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    json_data = json.loads(request.body)
-    data_passed_id = json_data.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    passed_id = url_passed_id <span class="hljs-keyword">or</span> data_passed_id <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
-    print(passed_id)
-    self.passed_id = passed_id
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        self.retrieve(request, *args, **kwargs)
-    <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveUpdateDestroyAPIView)</span>:</span>
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
 </code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># one_endpoint_test.py</span>
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None, is_json=True)</span>:</span>
-    ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-
-    <span class="hljs-keyword">if</span> is_json:
-        data = json.dumps(data)
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
-
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">11</span>})  <span class="hljs-comment"># data_passed_id</span>
+<h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC;</h2>
+<pre><code class="lang-commandline">touch restapi/scripts/two_endpoint_test.py
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-comment"># two_endpoint_test.py</span>
 </code></pre>
 
                                 
@@ -501,7 +428,7 @@ do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span cla
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"previous":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/17_Two_Views_for_CRUDL.md","mtime":"2018-09-17T09:17:52.969Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T09:20:28.183Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"previous":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/17_Two_Views_for_CRUDL.md","mtime":"2018-09-17T09:24:38.187Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T09:24:45.363Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
