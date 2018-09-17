@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>11. Detail API View · GitBook</title>
+        <title>14. One API Endpoint for CRUD Part I · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="12_Update_Delete_API_Views.html" />
     
-    
-    <link rel="prev" href="10_Create_API_View.html" />
+    <link rel="prev" href="13_Mixins_to_Power_Http_Methods.html" />
     
 
     </head>
@@ -219,7 +217,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.11" data-path="11_Detail_API_View.html">
+        <li class="chapter " data-level="1.11" data-path="11_Detail_API_View.html">
             
                 <a href="11_Detail_API_View.html">
             
@@ -258,7 +256,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="14_One_API_Endpoint_for_CRUD_Part_1.html">
+        <li class="chapter active" data-level="1.14" data-path="14_One_API_Endpoint_for_CRUD_Part_1.html">
             
                 <a href="14_One_API_Endpoint_for_CRUD_Part_1.html">
             
@@ -301,7 +299,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >11. Detail API View</a>
+        <a href=".." >14. One API Endpoint for CRUD Part I</a>
     </h1>
 </div>
 
@@ -316,31 +314,85 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="11-detail-api-view">11. Detail API View</h1>
-<h2 id="create-view">Create view</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
+                                <h1 id="14-one-api-endpoint-for-crud-i">14. One API Endpoint for CRUD I</h1>
+<blockquote>
+<p><code>StatusAPIView(List)</code>, <code>StatusCreateAPIView(Create)</code>
+<code>StatusDetailAPIView(Retrieve)</code>, <code>StatusUpdateAPIView(Update)</code>, <code>StatusDeleteAPIView(Destroy)</code></p>
+<p>CRUD API&#xB97C; &#xAD6C;&#xD604; &#xD558;&#xAE30;&#xC704;&#xD574; &#xC704;&#xC758; 5&#xAC1C;&#xC758; View&#xB97C; &#xAD6C;&#xD604; &#xD588;&#xB2E4;.
+&#xD558;&#xC9C0;&#xB9CC; &#xCF54;&#xB4DC;&#xAC00; &#xBE44;&#xC2B7;&#xD558;&#xAC70;&#xB098; &#xAC19;&#xAE30;&#xB3C4; &#xD558;&#xB2E4;.
+&#xADF8;&#xB798;&#xC11C; 5&#xAC1C;&#xC758; &#xD074;&#xB798;&#xC2A4;&#xB97C; &#xD558;&#xB098;&#xB85C; &#xAD6C;&#xD604; &#xD55C;&#xB2E4;.</p>
+</blockquote>
+<h2 id="create--list">Create + List</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> generics
+<span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> mixins
+<span class="hljs-keyword">from</span> status.models <span class="hljs-keyword">import</span> Status
+<span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404
+<span class="hljs-keyword">from</span> .srializers <span class="hljs-keyword">import</span> StatusSerializer
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveAPIView)</span>:</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusAPIView</span><span class="hljs-params">(mixins.CreateModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    mixins.RetrieveModelMixin,
+                    generics.ListAPIView)</span>:</span>
+
     permission_classes = []
     authentication_classes = []
-    queryset = Status.objects.all()
     serializer_class = StatusSerializer
-    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">&apos;get_queryset&apos;</span>)
+        qs = Status.objects.all()
+        query = self.request.GET.get(<span class="hljs-string">&apos;q&apos;</span>)
+        <span class="hljs-keyword">if</span> query <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            qs = qs.filter(content__icontains=query)
+        <span class="hljs-keyword">return</span> qs
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_object</span><span class="hljs-params">(self)</span>:</span>
+        request = self.request
+        passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
+        print(<span class="hljs-string">&apos;get_object&apos;</span>, passed_id)
+        queryset = self.get_queryset()
+        obj = <span class="hljs-keyword">None</span>
+        <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            obj = get_object_or_404(queryset, id=passed_id)
+            self.check_object_permissions(request, obj)
+        print(obj)
+        <span class="hljs-keyword">return</span> obj
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
+        print(<span class="hljs-string">&apos;get&apos;</span>, passed_id)
+        <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            self.retrieve(request, *args, **kwargs)
+        <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.create(request, *args, **kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">put</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.update(request, *args, **kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">patch</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.update(request, *args, **kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
+        <span class="hljs-keyword">return</span> self.destroy(request, *args, **kwargs)
 </code></pre>
-<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
+<h2 id="urls">urls</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
 
-<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
-
-<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView, StatusDetailAPIView
+<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusDetailAPIView
 
 urlpatterns = [
-    ...
-    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/&apos;</span>, StatusDetailAPIView.as_view()),
+    path(<span class="hljs-string">&apos;&apos;</span>, StatusAPIView.as_view()),
 ]
 </code></pre>
 <h2 id="test">Test</h2>
-<p><a href="http://127.0.0.1:8000/api/status/5s/" target="_blank">http://127.0.0.1:8000/api/status/5s/</a></p>
+<p><a href="http://127.0.0.1:8000/api/status/" target="_blank">http://127.0.0.1:8000/api/status/</a></p>
+<p>get_queryset &#xD568;&#xC218;&#xB97C; &#xD638;&#xCD9C; &#xD55C;&#xB2E4;.</p>
+<p><a href="http://127.0.0.1:8000/api/status/?id=8" target="_blank">http://127.0.0.1:8000/api/status/?id=8</a></p>
+<p>get -&gt; get_object -&gt; get_queryset &#xD568;&#xC218;&#xB97C; &#xCC28;&#xB840;&#xB85C; &#xD638;&#xCD9C; &#xD55C;&#xB2E4;.</p>
 
                                 
                                 </section>
@@ -368,14 +420,10 @@ urlpatterns = [
 
             
                 
-                <a href="10_Create_API_View.html" class="navigation navigation-prev " aria-label="Previous page: 10. Create API View">
+                <a href="13_Mixins_to_Power_Http_Methods.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 13. Mixin to Power Http Methods">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="12_Update_Delete_API_Views.html" class="navigation navigation-next " aria-label="Next page: 12. Update & Delete API Views">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -384,7 +432,7 @@ urlpatterns = [
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"11. Detail API View","level":"1.11","depth":1,"next":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"path":"posts/12_Update_Delete_API_Views.md","ref":"posts/12_Update_Delete_API_Views.md","articles":[]},"previous":{"title":"10. Create API View","level":"1.10","depth":1,"path":"posts/10_Create_API_View.md","ref":"posts/10_Create_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/11_Detail_API_View.md","mtime":"2018-09-13T13:59:14.141Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T05:54:27.896Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"14. One API Endpoint for CRUD Part I","level":"1.14","depth":1,"previous":{"title":"13. Mixin to Power Http Methods","level":"1.13","depth":1,"path":"posts/13_Mixins_to_Power_Http_Methods.md","ref":"posts/13_Mixins_to_Power_Http_Methods.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","mtime":"2018-09-17T05:51:30.809Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T05:54:27.896Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

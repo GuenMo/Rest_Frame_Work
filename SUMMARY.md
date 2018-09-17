@@ -13,4 +13,4 @@
 - [11. Detail API View](posts/11_Detail_API_View.md)
 - [12. Update & Delete API Views](posts/12_Update_Delete_API_Views.md)
 - [13. Mixin to Power Http Methods](posts/13_Mixins_to_Power_Http_Methods.md)
-- [14. One API Endpoint for CRUD Part I](posts/14_One_API_Endpoint_for_CRUD_Part_I.md)
+- [14. One API Endpoint for CRUD Part I](posts/14_One_API_Endpoint_for_CRUD_Part_1.md)
