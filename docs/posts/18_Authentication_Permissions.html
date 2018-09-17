@@ -371,25 +371,27 @@
 <blockquote>
 <p>&#xD398;&#xC774;&#xC9C0;&#xC5D0; &#xB85C;&#xADF8;&#xC778; &#xD55C; &#xC720;&#xC800;&#xC758; &#xC774;&#xB984;&#xC744; &#xC54C;&#xC544; &#xB0B8;&#xB2E4;.</p>
 </blockquote>
-<p>```python {.line-numbers}</p>
-<h1 id="viewspy">views.py</h1>
-<p>from rest_framework.authentication import SessionAuthentication</p>
-<p>class StatusAPIView(generics.ListCreateAPIView):</p>
-<pre><code>permission_classes = []
-authentication_classes = [SessionAuthentication]
-serializer_class = StatusSerializer
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;views.py</span>
 
-def get_queryset(self):
-    qs = Status.objects.all()
-    query = self.request.GET.get(&apos;q&apos;)
-    if query is not None:
-        qs = qs.filter(content__icontains=query)
-    return qs
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">authentication</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">SessionAuthentication</span>
 
-def perform_create(self, serializer):
-    print(self.request.user)
-    serializer.save(user=self.request.user)
-</code></pre><p>```</p>
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusAPIView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">generics</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ListCreateAPIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">permission_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-operator">&amp;</span><span class="sunlight-operator">&amp;</span><span class="sunlight-operator">&amp;</span><span class="sunlight-ident">authentication_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-ident">SessionAuthentication</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer_class</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get_queryset</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">qs</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">objects</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">all</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">query</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">GET</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;q&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">query</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">qs</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">qs</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">filter</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">content__icontains</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">query</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">qs</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">perform_create</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">save</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 
                                 
                                 </section>
@@ -429,7 +431,7 @@ def perform_create(self, serializer):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"previous":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/18_Authentication_Permissions.md","mtime":"2018-09-17T12:51:42.371Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:52:02.428Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"18. Authentication & Permissions","level":"1.18","depth":1,"previous":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter","code-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"code-highlighter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/18_Authentication_Permissions.md","mtime":"2018-09-17T12:57:40.523Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:58:04.030Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
