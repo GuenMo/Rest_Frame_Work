@@ -22,3 +22,4 @@
 - [20. Permission Tests with Python Requests](posts/20_Permission_Tests_with_Python_Requests.md)
 - [21. Implement JWT Authentication](posts/21_Implement_JWT_Authentication.md)
 - [22. JWT Authorization Header](posts/22_JWT_Authorization_Header.md)
+- [23. Custom JWT Response Payload Handler](posts/23_Custom_JWT_Response_Payload_Handler.md)

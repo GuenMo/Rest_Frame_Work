@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>21. Implement JWT Authentication · GitBook</title>
+        <title>23. Custom JWT Response Payload Handler · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="22_JWT_Authorization_Header.html" />
     
-    
-    <link rel="prev" href="20_Permission_Tests_with_Python_Requests.html" />
+    <link rel="prev" href="22_JWT_Authorization_Header.html" />
     
 
     </head>
@@ -349,7 +347,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.21" data-path="21_Implement_JWT_Authentication.html">
+        <li class="chapter " data-level="1.21" data-path="21_Implement_JWT_Authentication.html">
             
                 <a href="21_Implement_JWT_Authentication.html">
             
@@ -375,7 +373,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.23" data-path="23_Custom_JWT_Response_Payload_Handler.html">
+        <li class="chapter active" data-level="1.23" data-path="23_Custom_JWT_Response_Payload_Handler.html">
             
                 <a href="23_Custom_JWT_Response_Payload_Handler.html">
             
@@ -418,7 +416,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >21. Implement JWT Authentication</a>
+        <a href=".." >23. Custom JWT Response Payload Handler</a>
     </h1>
 </div>
 
@@ -433,67 +431,52 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="21-implement-jwt-authentication">21. Implement JWT Authentication</h1>
-<h2 id="installation">Installation</h2>
-<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">pip&#xA0;install&#xA0;djangorestframework-jwt
-</span></pre></div></div></code></pre>
-<h2 id="usage">Usage</h2>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/restconf/main.py</span>
-
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">datetime</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">datetime</span>
-
-<span class="sunlight-ident">REST_FRAMEWORK</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;DEFAULT_AUTHENTICATION_CLASSES&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-delimiter">(</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.authentication.JSONWebTokenAuthentication&apos;</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;&apos;rest_framework.authentication.SessionAuthentication&apos;,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;&apos;rest_framework.authentication.BasicAuthentication&apos;,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;DEFAULT_PERMISSION_CLASSES&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-delimiter">(</span>
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework.permissions.IsAuthenticatedOrReadOnly&apos;</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-<span class="sunlight-delimiter">}</span>
-
-<span class="sunlight-ident">JWT_AUTH</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_ENCODE_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.utils.jwt_encode_handler&apos;</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_DECODE_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.utils.jwt_decode_handler&apos;</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_PAYLOAD_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.utils.jwt_payload_handler&apos;</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_PAYLOAD_GET_USER_ID_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler&apos;</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_RESPONSE_PAYLOAD_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;rest_framework_jwt.utils.jwt_response_payload_handler&apos;</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_ALLOW_REFRESH&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-constant">True</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_REFRESH_EXPIRATION_DELTA&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">datetime</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">timedelta</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">days</span><span class="sunlight-delimiter">=</span><span class="sunlight-number">7</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_AUTH_HEADER_PREFIX&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;JWT&apos;</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;JWT_AUTH_COOKIE&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">,</span>
-<span class="sunlight-delimiter">}</span>
-</span></pre></div></div></code></pre>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/urls.py</span>
-
-<span class="sunlight-ellipsis">...</span>
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework_jwt</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">obtain_jwt_token</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">refresh_jwt_token</span>
-
-<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;admin/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">admin</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">site</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/auth/jwt/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">obtain_jwt_token</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/auth/jwt/refresh/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">refresh_jwt_token</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/status/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;status.api.urls&apos;</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-<span class="sunlight-delimiter">]</span>
-<span class="sunlight-ellipsis">...</span>
-</span></pre></div></div></code></pre>
-<h2 id="test">Test</h2>
-<p><a href="http://127.0.0.1:8000/api/auth/jwt/" target="_blank">http://127.0.0.1:8000/api/auth/jwt/</a></p>
+                                <h1 id="23-custom-jwt-response-payload-handler">23. Custom JWT Response Payload Handler</h1>
 <blockquote>
-<p>username, password &#xC785;&#xB825;&#xD558;&#xACE0; <strong>post</strong> &#xD074;&#xB9AD; &#xD558;&#xBA74; token&#xC774; &#xB9CC;&#xB4E4;&#xC5B4; &#xC9C4;&#xB2E4;.</p>
+<p>token &#xC815;&#xBCF4; &#xC678;&#xC5D0; <strong>user name</strong> &#xACFC; <strong>expires</strong> &#xCD94;&#xAC00; &#xC815;&#xBCF4;&#xB97C; &#xCD94;&#xAC00; &#xD55C;&#xB2E4;.</p>
 </blockquote>
+<h2 id="create-app-accounts">Create app <strong>accounts</strong></h2>
+<pre><code class="lang-conmandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-conmandline sunlight-highlighted"><span class="sunlight-plaintext">python&#xA0;manage.py&#xA0;startapp&#xA0;accounts
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/settings.py</span>
+
+<span class="sunlight-ident">INSTALLED_APPS</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ellipsis">...</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;accounts&apos;</span>
+<span class="sunlight-delimiter">]</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-conmandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-conmandline sunlight-highlighted"><span class="sunlight-plaintext">python&#xA0;manage.py&#xA0;makemigrations
+python&#xA0;manage.py&#xA0;migrate
+</span></pre></div></div></code></pre>
+<h2 id="api-&#xCD94;&#xAC00;">API &#xCD94;&#xAC00;</h2>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">mkdir&#xA0;restapi/accounts/api
+touch&#xA0;restapi/accounts/api/__init__.py
+touch&#xA0;restapi/accounts/api/utils.py
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;utils.py</span>
+
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">datetime</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">settings</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">utils</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">timezone</span>
+
+<span class="sunlight-ident">expire_delta</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">JWT_AUTH</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;JWT_REFRESH_EXPIRATION_DELTA&apos;</span><span class="sunlight-delimiter">]</span>
+
+
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">jwt_response_payload_handler</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">token</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">user</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-delimiter">{</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;token&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">token</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">user</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">username</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;expires&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">timezone</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">now</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-ident">expire_delta</span>&#xA0;<span class="sunlight-operator">-</span>&#xA0;<span class="sunlight-ident">datetime</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">timedelta</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">seconds</span><span class="sunlight-delimiter">=</span><span class="sunlight-number">200</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">}</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/resconf/main.py</span>
+
+<span class="sunlight-ellipsis">...</span>
+<span class="sunlight-string">&apos;JWT_RESPONSE_PAYLOAD_HANDLER&apos;</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;&apos;rest_framework_jwt.utils.jwt_response_payload_handler&apos;,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;accounts.api.utils.jwt_response_payload_handler&apos;</span><span class="sunlight-delimiter">,</span>
+<span class="sunlight-ellipsis">...</span>
+</span></pre></div></div></code></pre>
 <h2 id="api-test">API Test</h2>
 <pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">json</span>
 <span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">requests</span>
@@ -501,22 +484,16 @@
 <span class="sunlight-ident">AUTH_ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/auth/jwt/&apos;</span>
 <span class="sunlight-ident">REFRESH_ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">AUTH_ENDPOINT</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-string">&apos;refresh/&apos;</span>
 
-<span class="sunlight-ident">headers</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;Content-Type&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;application/json&apos;</span>
-<span class="sunlight-delimiter">}</span>
-
-<span class="sunlight-comment">#&#xA0;Get&#xA0;Toke</span>
-<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;username&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;admin&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;password&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;********&apos;</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">headers</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;Content-Type&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;application/json&apos;</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;username&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;admin&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;password&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;1004kgm44&apos;</span><span class="sunlight-delimiter">}</span>
 
 <span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">post</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">AUTH_ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">headers</span><span class="sunlight-delimiter">)</span>
 <span class="sunlight-ident">token</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;token&apos;</span><span class="sunlight-delimiter">]</span>
+<span class="sunlight-ident">user</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">]</span>
+<span class="sunlight-ident">expires</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;expires&apos;</span><span class="sunlight-delimiter">]</span>
 <span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">token</span><span class="sunlight-delimiter">)</span>
-
-<span class="sunlight-ident">refresh_data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;token&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">token</span><span class="sunlight-delimiter">}</span>
-
-<span class="sunlight-ident">new_r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">post</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">REFRESH_ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">refresh_data</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">headers</span><span class="sunlight-delimiter">)</span>
-<span class="sunlight-ident">new_token</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">new_r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">json</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;token&apos;</span><span class="sunlight-delimiter">]</span>
-<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">new_token</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">expires</span><span class="sunlight-delimiter">)</span>
 </span></pre></div></div></code></pre>
 
                                 
@@ -545,14 +522,10 @@
 
             
                 
-                <a href="20_Permission_Tests_with_Python_Requests.html" class="navigation navigation-prev " aria-label="Previous page: 20. Permission Tests with Python Requests">
+                <a href="22_JWT_Authorization_Header.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 22. JWT Authorization Header">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="22_JWT_Authorization_Header.html" class="navigation navigation-next " aria-label="Next page: 22. JWT Authorization Header">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -561,7 +534,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"21. Implement JWT Authentication","level":"1.21","depth":1,"next":{"title":"22. JWT Authorization Header","level":"1.22","depth":1,"path":"posts/22_JWT_Authorization_Header.md","ref":"posts/22_JWT_Authorization_Header.md","articles":[]},"previous":{"title":"20. Permission Tests with Python Requests","level":"1.20","depth":1,"path":"posts/20_Permission_Tests_with_Python_Requests.md","ref":"posts/20_Permission_Tests_with_Python_Requests.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/21_Implement_JWT_Authentication.md","mtime":"2018-09-17T17:47:33.184Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T19:03:33.893Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"23. Custom JWT Response Payload Handler","level":"1.23","depth":1,"previous":{"title":"22. JWT Authorization Header","level":"1.22","depth":1,"path":"posts/22_JWT_Authorization_Header.md","ref":"posts/22_JWT_Authorization_Header.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/23_Custom_JWT_Response_Payload_Handler.md","mtime":"2018-09-17T19:02:23.730Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T19:03:33.893Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
