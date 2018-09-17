@@ -393,6 +393,37 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="20-permission-tests-with-python-requests">20. Permission Tests with Python Requests</h1>
+<h2 id="test">Test</h2>
+<blockquote>
+<p>Create &#xCF54;&#xB4DC;&#xC5D0;&#xC11C; &#xC5D0;&#xB7EC;&#xB098; &#xB09C;&#xB2E4;.</p>
+</blockquote>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">json</span>
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">requests</span>
+
+<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+<span class="sunlight-ident">image_path</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;d:/mai.jpg&apos;</span>
+
+<span class="sunlight-comment">#&#xA0;Detail</span>
+<span class="sunlight-ident">get_endpoint</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-function">str</span><span class="sunlight-delimiter">(</span><span class="sunlight-number">20</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">get_endpoint</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+
+<span class="sunlight-comment">#&#xA0;List</span>
+<span class="sunlight-ident">r2</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r2</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r2</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">status_code</span><span class="sunlight-delimiter">)</span>
+
+<span class="sunlight-comment">#&#xA0;Create</span>
+<span class="sunlight-ident">post_data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;Some&#xA0;random&#xA0;content&apos;</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-ident">post_headers</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;content-type&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;application/json&apos;</span>
+<span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">post_response</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">post</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">post_data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">post_headers</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">post_response</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<h2 id="oaouth2">OAouth2</h2>
+<p><a href="http://www.sauru.so/blog/basic-of-oauth2-and-jwt/" target="_blank">http://www.sauru.so/blog/basic-of-oauth2-and-jwt/</a></p>
+<h2 id="json-web-tokenjwt">Json Web Token(JWT)</h2>
 
                                 
                                 </section>
@@ -432,7 +463,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"20. Permission Tests with Python Requests","level":"1.20","depth":1,"previous":{"title":"19. Global Settings for Authentication Permissions","level":"1.19","depth":1,"path":"posts/19_Global_Settings_for_Authentication_Permissions.md","ref":"posts/19_Global_Settings_for_Authentication_Permissions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/20_Permission_Tests_with_Python_Requests.md","mtime":"2018-09-17T14:13:39.865Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T14:16:26.156Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"20. Permission Tests with Python Requests","level":"1.20","depth":1,"previous":{"title":"19. Global Settings for Authentication Permissions","level":"1.19","depth":1,"path":"posts/19_Global_Settings_for_Authentication_Permissions.md","ref":"posts/19_Global_Settings_for_Authentication_Permissions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/20_Permission_Tests_with_Python_Requests.md","mtime":"2018-09-17T17:02:28.544Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T17:02:38.590Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
