@@ -1,0 +1,533 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>7. Validation & Fields · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sunlight-highlighter/sunlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="08_API_Endpoints_Overview.html" />
+    
+    
+    <link rel="prev" href="06_Create_Update_throuth_serializers.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    1. Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="02_Install_the_Django_Rest_Framework.html">
+            
+                <a href="02_Install_the_Django_Rest_Framework.html">
+            
+                    
+                    2. Install the Django Rest Framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="03_Status_Model_App.html">
+            
+                <a href="03_Status_Model_App.html">
+            
+                    
+                    3. Status Model & App
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="04_Model_From_for_Validation.html">
+            
+                <a href="04_Model_From_for_Validation.html">
+            
+                    
+                    4. Model Form for Validation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="05_Creating_a_Serializer.html">
+            
+                <a href="05_Creating_a_Serializer.html">
+            
+                    
+                    5. Creating a Serializer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="06_Create_Update_throuth_serializers.html">
+            
+                <a href="06_Create_Update_throuth_serializers.html">
+            
+                    
+                    6. Create & Update throuth serializers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="07_Validation_Fields.html">
+            
+                <a href="07_Validation_Fields.html">
+            
+                    
+                    7. Validation & Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="08_API_Endpoints_Overview.html">
+            
+                <a href="08_API_Endpoints_Overview.html">
+            
+                    
+                    8. API Endpoints Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="09_List_Search_API_View.html">
+            
+                <a href="09_List_Search_API_View.html">
+            
+                    
+                    9. List & Search API View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="10_Create_API_View.html">
+            
+                <a href="10_Create_API_View.html">
+            
+                    
+                    10. Create API View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="11_Detail_API_View.html">
+            
+                <a href="11_Detail_API_View.html">
+            
+                    
+                    11. Detail API View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="12_Update_Delete_API_Views.html">
+            
+                <a href="12_Update_Delete_API_Views.html">
+            
+                    
+                    12. Update & Delete API Views
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="13_Mixins_to_Power_Http_Methods.html">
+            
+                <a href="13_Mixins_to_Power_Http_Methods.html">
+            
+                    
+                    13. Mixin to Power Http Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="14_One_API_Endpoint_for_CRUD_Part_1.html">
+            
+                <a href="14_One_API_Endpoint_for_CRUD_Part_1.html">
+            
+                    
+                    14. One API Endpoint for CRUD Part I
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="15_One_API_Endpoint_for_CRUD_Part_2.html">
+            
+                <a href="15_One_API_Endpoint_for_CRUD_Part_2.html">
+            
+                    
+                    15. One API Endpoint for CRUD Part II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="16_Uploading_Handling_Images.html">
+            
+                <a href="16_Uploading_Handling_Images.html">
+            
+                    
+                    16. Uploading & Handling Images
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="17_Two_Views_for_CRUDL.html">
+            
+                <a href="17_Two_Views_for_CRUDL.html">
+            
+                    
+                    17. Two Views for CRUDL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="18_Authentication_Permissions.html">
+            
+                <a href="18_Authentication_Permissions.html">
+            
+                    
+                    18. Authentication & Permissions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >7. Validation & Fields</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="7-validation--fields">7. Validation &amp; Fields</h1>
+<h2 id="forms">forms</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusForm</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">forms</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ModelForm</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">Meta</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">model</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">fields</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;image&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">]</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">clean_content</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">cleaned_data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-function">len</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">content</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-operator">&gt;</span>&#xA0;<span class="sunlight-number">240</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">forms</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;is&#xA0;too&#xA0;long.&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">content</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">clean</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">cleaned_data</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-constant">None</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span>&#xA0;<span class="sunlight-keyword">and</span>&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">forms</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;or&#xA0;image&#xA0;is&#xA0;required.&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-function">super</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">clean</span><span class="sunlight-delimiter">(</span><span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<h2 id="serializer">serializer</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusSerializer</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">serializers</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ModelSerializer</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">Meta</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">model</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">fields</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;image&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-delimiter">]</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">validate_content</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">value</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-function">len</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">value</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-operator">&gt;</span>&#xA0;<span class="sunlight-number">240</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">serializers</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;is&#xA0;too&#xA0;long.&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">value</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">validate</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-constant">None</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span>&#xA0;<span class="sunlight-keyword">and</span>&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">raise</span>&#xA0;<span class="sunlight-named-ident">serializers</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ValidationError</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;Content&#xA0;or&#xA0;image&#xA0;is&#xA0;required.&apos;</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">data</span>
+</span></pre></div></div></code></pre>
+<ol>
+<li>clean<em><field_name>(self, <em>args, *</em>kwargs) ==&gt; validate</field_name></em><filed_name>(self, value)</filed_name></li>
+<li>content = self.cleaned_data.get(&apos;content&apos;) ==&gt; value</li>
+<li>forms.ValidationError ==&gt; serializer.ValidationError</li>
+<li>data = self.cleaned_data ==&gt; data</li>
+<li>return super().clean(<em>args, *</em>kwargs) ==&gt; return data</li>
+</ol>
+<h2 id="test">Test</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">api</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">srializers</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
+
+<span class="sunlight-comment">#&#xA0;&#xCF58;&#xD150;&#xD2B8;&#xC640;&#xA0;&#xC774;&#xBBF8;&#xC9C0;&#xAC00;&#xA0;&#xC5C6;&#xC774;&#xA0;&#xC0DD;&#xC131;&#xA0;&#xD560;&#xA0;&#xB54C;&#xA0;&#xC5D0;&#xB7EC;&#xA0;&#xD655;&#xC778;</span>
+<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">1</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">serializer</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">is_valid</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-comment">#&#xA0;Result:&#xA0;False</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">errors</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">error_messages</span>
+
+<span class="sunlight-comment">#&#xA0;&#xCF58;&#xD150;&#xD2B8;&#xA0;&#xB0B4;&#xC6A9;&#xC774;&#xA0;240&#xC790;&#xA0;&#xC774;&#xC0C1;&#xA0;&#xC77C;&#xA0;&#xB54C;&#xA0;&#xC5D0;&#xB7EC;&#xA0;&#xD655;&#xC778;</span>
+<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">1</span><span class="sunlight-delimiter">,</span><span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&apos;</span><span class="sunlight-delimiter">,</span><span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">serializer</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">is_valid</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-comment">#&#xA0;Result:&#xA0;False</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">errors</span>
+<span class="sunlight-ident">serializer</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">error_messages</span>
+</span></pre></div></div></code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="06_Create_Update_throuth_serializers.html" class="navigation navigation-prev " aria-label="Previous page: 6. Create & Update throuth serializers">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="08_API_Endpoints_Overview.html" class="navigation navigation-next " aria-label="Next page: 8. API Endpoints Overview">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"7. Validation & Fields","level":"1.7","depth":1,"next":{"title":"8. API Endpoints Overview","level":"1.8","depth":1,"path":"posts/08_API_Endpoints_Overview.md","ref":"posts/08_API_Endpoints_Overview.md","articles":[]},"previous":{"title":"6. Create & Update throuth serializers","level":"1.6","depth":1,"path":"posts/06_Create_Update_throuth_serializers.md","ref":"posts/06_Create_Update_throuth_serializers.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter","code-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"code-highlighter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/07_Validation_Fields.md","mtime":"2018-09-13T10:05:49.217Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T13:05:55.657Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
