@@ -54,7 +54,7 @@ class StatusSerializer(serializers.ModelSerializer):
 
 ## Permissions
 
-> permission_classes 는 권한을 설정 한다. 
+> permission_classes 는 권한을 설정 한다.
 > 로그 아웃 상태에서는 StatusAPIView 에서 에러가 난다.
 > perform_create 함수에서 user 객체가 정의 되지 않기 때문이다.
 > IsAuthenticatedOrReadOnly 란 로그인 된 user에게 쓰기 읽기 권한을 주고 그렇지 않을 경우 읽기 권한만 준다.
