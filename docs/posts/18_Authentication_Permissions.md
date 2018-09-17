@@ -12,7 +12,7 @@ from rest_framework.authentication import SessionAuthentication
 class StatusAPIView(generics.ListCreateAPIView):
 
     permission_classes = []
-    authentication_classes = [SessionAuthentication]
+    &&&authentication_classes = [SessionAuthentication]
     serializer_class = StatusSerializer
 
     def get_queryset(self):
