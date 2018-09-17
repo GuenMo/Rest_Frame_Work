@@ -17,7 +17,7 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sunlight-highlighter/sunlight.css">
                 
             
                 
@@ -370,27 +370,27 @@
                                 
                                 <h1 id="11-detail-api-view">11. Detail API View</h1>
 <h2 id="create-view">Create view</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/api/views.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/api/views.py</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusDetailAPIView</span><span class="hljs-params">(generics.RetrieveAPIView)</span>:</span>
-    permission_classes = []
-    authentication_classes = []
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-    <span class="hljs-comment"># lookup_field = &apos;slug&apos;</span>
-</code></pre>
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusDetailAPIView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">generics</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">RetrieveAPIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">permission_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">authentication_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">queryset</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">objects</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">all</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer_class</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;lookup_field&#xA0;=&#xA0;&apos;slug&apos;</span>
+</span></pre></div></div></code></pre>
 <h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/api/urls.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/api/urls.py</span>
 
-<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">path</span>
 
-<span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> StatusAPIView, StatusCreateAPIView, StatusDetailAPIView
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">StatusAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusCreateAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDetailAPIView</span>
 
-urlpatterns = [
-    ...
-    path(<span class="hljs-string">&apos;&lt;int:pk&gt;/&apos;</span>, StatusDetailAPIView.as_view()),
-]
-</code></pre>
+<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ellipsis">...</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&lt;int:pk&gt;/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDetailAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+<span class="sunlight-delimiter">]</span>
+</span></pre></div></div></code></pre>
 <h2 id="test">Test</h2>
 <p><a href="http://127.0.0.1:8000/api/status/5s/" target="_blank">http://127.0.0.1:8000/api/status/5s/</a></p>
 
@@ -436,7 +436,7 @@ urlpatterns = [
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"11. Detail API View","level":"1.11","depth":1,"next":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"path":"posts/12_Update_Delete_API_Views.md","ref":"posts/12_Update_Delete_API_Views.md","articles":[]},"previous":{"title":"10. Create API View","level":"1.10","depth":1,"path":"posts/10_Create_API_View.md","ref":"posts/10_Create_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/11_Detail_API_View.md","mtime":"2018-09-13T13:59:14.141Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:13:59.424Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"11. Detail API View","level":"1.11","depth":1,"next":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"path":"posts/12_Update_Delete_API_Views.md","ref":"posts/12_Update_Delete_API_Views.md","articles":[]},"previous":{"title":"10. Create API View","level":"1.10","depth":1,"path":"posts/10_Create_API_View.md","ref":"posts/10_Create_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/11_Detail_API_View.md","mtime":"2018-09-13T13:59:14.141Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:43:51.038Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

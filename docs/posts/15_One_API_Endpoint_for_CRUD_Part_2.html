@@ -17,7 +17,7 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sunlight-highlighter/sunlight.css">
                 
             
                 
@@ -370,113 +370,113 @@
                                 
                                 <h1 id="15-one-api-endpoint-for-crud-ii">15. One API Endpoint for CRUD II</h1>
 <h2 id="install-requests">Install &apos;requests&apos;</h2>
-<pre><code class="lang-commandline">pip install requests
-</code></pre>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">pip&#xA0;install&#xA0;requests
+</span></pre></div></div></code></pre>
 <h2 id="&#xD14C;&#xC2A4;&#xD2B8;-&#xC2A4;&#xD06C;&#xB9BD;&#xD2B8;-&#xD30C;&#xC77C;">&#xD14C;&#xC2A4;&#xD2B8; &#xC2A4;&#xD06C;&#xB9BD;&#xD2B8; &#xD30C;&#xC77C;</h2>
-<pre><code class="lang-commandline">mkdir restapi/scripts
-touch one_endpoints_test.py
-</code></pre>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">mkdir&#xA0;restapi/scripts
+touch&#xA0;one_endpoints_test.py
+</span></pre></div></div></code></pre>
 <h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-i">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; I</h2>
 <p>url&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
-<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;on_endpoints_test.py</span>
 
-<span class="hljs-keyword">import</span> requests
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">requests</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None)</span>:</span>
-    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
-    <span class="hljs-keyword">else</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-function">id</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-string">&apos;?id=&apos;</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-function">str</span><span class="sunlight-delimiter">(</span><span class="sunlight-function">id</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">else</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">r</span>
 
-do_one_endpoint(id=<span class="hljs-number">11</span>)
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-</code></pre>
+<span class="sunlight-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-number">11</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-comment">#&#xA0;[{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+</span></pre></div></div></code></pre>
 <h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-ii">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; II</h2>
 <p>data&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
-<pre><code class="lang-python"><span class="hljs-comment"># views.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;views.py</span>
 
-<span class="hljs-keyword">import</span> json
-...
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
-    url_passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    json_data = json.loads(request.body)
-    data_passed_id = json_data.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    passed_id = url_passed_id <span class="hljs-keyword">or</span> data_passed_id <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
-    print(passed_id)
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        self.retrieve(request, *args, **kwargs)
-    <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
-</code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># on_endpoints_test.py</span>
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">json</span>
+<span class="sunlight-ellipsis">...</span>
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">url_passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">GET</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">json_data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">loads</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">body</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data_passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json_data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">url_passed_id</span>&#xA0;<span class="sunlight-keyword">or</span>&#xA0;<span class="sunlight-ident">data_passed_id</span>&#xA0;<span class="sunlight-keyword">or</span>&#xA0;<span class="sunlight-constant">None</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">passed_id</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">retrieve</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-function">super</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;on_endpoints_test.py</span>
 
-<span class="hljs-keyword">import</span> requests
-<span class="hljs-keyword">import</span> json
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">requests</span>
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">json</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None, is_json=True)</span>:</span>
-    <span class="hljs-keyword">if</span> is_json:
-        data = json.dumps(data)
-    <span class="hljs-keyword">if</span> id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span> + <span class="hljs-string">&apos;?id=&apos;</span> + str(id)
-    <span class="hljs-keyword">else</span>:
-        ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">is_json</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">is_json</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-function">id</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-string">&apos;?id=&apos;</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-function">str</span><span class="sunlight-delimiter">(</span><span class="sunlight-function">id</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">else</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">r</span>
 
 
-do_one_endpoint(id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id</span>
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>})  <span class="hljs-comment"># data_passed_id</span>
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">8</span>}, id=<span class="hljs-number">11</span>)  <span class="hljs-comment"># url_passed_id &amp; data_passed_id</span>
+<span class="sunlight-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-number">11</span><span class="sunlight-delimiter">)</span>&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;url_passed_id</span>
+<span class="sunlight-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">8</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">)</span>&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;data_passed_id</span>
+<span class="sunlight-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">8</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-number">11</span><span class="sunlight-delimiter">)</span>&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;url_passed_id&#xA0;&amp;&#xA0;data_passed_id</span>
 
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
-<span class="hljs-comment"># [{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+<span class="sunlight-comment">#&#xA0;[{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+<span class="sunlight-comment">#&#xA0;[{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
+<span class="sunlight-comment">#&#xA0;[{&quot;id&quot;:8,&quot;user&quot;:1,&quot;content&quot;:&quot;Update&quot;,&quot;image&quot;:null},{&quot;id&quot;:11,&quot;user&quot;:1,&quot;content&quot;:&quot;&#xC544;&#xC544;&#xC544;&#xC544;&#xC544;&quot;,&quot;image&quot;:null}]</span>
 
-<span class="hljs-comment"># 11</span>
-<span class="hljs-comment"># 8</span>
-<span class="hljs-comment"># 11</span>
-</code></pre>
+<span class="sunlight-comment">#&#xA0;11</span>
+<span class="sunlight-comment">#&#xA0;8</span>
+<span class="sunlight-comment">#&#xA0;11</span>
+</span></pre></div></div></code></pre>
 <h2 id="&#xC678;&#xBD80;&#xC5D0;&#xC11C;-api-&#xC811;&#xADFC;-iii">&#xC678;&#xBD80;&#xC5D0;&#xC11C; API &#xC811;&#xADFC; III</h2>
 <p>data&#xC5D0; id &#xC815;&#xBCF4;&#xB97C; &#xD3EC;&#xD568;&#xD574;&#xC11C; &#xC811;&#xADFC; &#xD55C;&#xB2E4;.</p>
-<pre><code class="lang-python"><span class="hljs-comment"># views.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;views.py</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_object</span><span class="hljs-params">(self)</span>:</span>
-    request = self.request
-    passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>) <span class="hljs-keyword">or</span> self.passed_id
-    queryset = self.get_queryset()
-    obj = <span class="hljs-keyword">None</span>
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        obj = get_object_or_404(queryset, id=passed_id)
-        self.check_object_permissions(request, obj)
-    <span class="hljs-keyword">return</span> obj
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get_object</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">request</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">GET</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-keyword">or</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">passed_id</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">queryset</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get_queryset</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">obj</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-constant">None</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">obj</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">get_object_or_404</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">queryset</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">passed_id</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">check_object_permissions</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">obj</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">obj</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request, *args, **kwargs)</span>:</span>
-    url_passed_id = request.GET.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    json_data = json.loads(request.body)
-    data_passed_id = json_data.get(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-keyword">None</span>)
-    passed_id = url_passed_id <span class="hljs-keyword">or</span> data_passed_id <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
-    print(passed_id)
-    self.passed_id = passed_id
-    <span class="hljs-keyword">if</span> passed_id <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        self.retrieve(request, *args, **kwargs)
-    <span class="hljs-keyword">return</span> super().get(request, *args, **kwargs)
-</code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># one_endpoint_test.py</span>
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">url_passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">GET</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">json_data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">loads</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">body</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data_passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json_data</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">url_passed_id</span>&#xA0;<span class="sunlight-keyword">or</span>&#xA0;<span class="sunlight-ident">data_passed_id</span>&#xA0;<span class="sunlight-keyword">or</span>&#xA0;<span class="sunlight-constant">None</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">passed_id</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">passed_id</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">passed_id</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">retrieve</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-function">super</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">get</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;one_endpoint_test.py</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_one_endpoint</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, id=None, is_json=True)</span>:</span>
-    ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-function">id</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">is_json</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
 
-    <span class="hljs-keyword">if</span> is_json:
-        data = json.dumps(data)
-    r = requests.request(method, ENDPOINT, data=data)
-    print(r.text)
-    <span class="hljs-keyword">return</span> r
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">is_json</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">r</span>
 
-do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span class="hljs-number">11</span>})  <span class="hljs-comment"># data_passed_id</span>
-</code></pre>
+<span class="sunlight-ident">do_one_endpoint</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;id&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">11</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">)</span>&#xA0;&#xA0;<span class="sunlight-comment">#&#xA0;data_passed_id</span>
+</span></pre></div></div></code></pre>
 
                                 
                                 </section>
@@ -520,7 +520,7 @@ do_one_endpoint(data={<span class="hljs-string">&apos;id&apos;</span>: <span cla
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"next":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"previous":{"title":"14. One API Endpoint for CRUD Part I","level":"1.14","depth":1,"path":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","ref":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","mtime":"2018-09-17T09:25:16.982Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:13:59.424Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"next":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"path":"posts/16_Uploading_Handling_Images.md","ref":"posts/16_Uploading_Handling_Images.md","articles":[]},"previous":{"title":"14. One API Endpoint for CRUD Part I","level":"1.14","depth":1,"path":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","ref":"posts/14_One_API_Endpoint_for_CRUD_Part_1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","mtime":"2018-09-17T09:25:16.982Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:43:51.038Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

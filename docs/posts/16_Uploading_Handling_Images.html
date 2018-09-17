@@ -17,7 +17,7 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sunlight-highlighter/sunlight.css">
                 
             
                 
@@ -370,75 +370,75 @@
                                 
                                 <h1 id="16-uploading--handling-images">16. Uploading &amp; Handling Images</h1>
 <h2 id="upload-location">Upload location</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/models.py</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_status_image</span><span class="hljs-params">(instance, filename)</span>:</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;status/{user}/{filename}&quot;</span>.format(user=instance.user, filename=filename)
-</code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># mysite/settings.py</span>
-MEDIA_ROOT = os.path.join(BASE_DIR, <span class="hljs-string">&apos;media_root&apos;</span>)
-MEDIA_URL = <span class="hljs-string">&apos;/media/&apos;</span>
-</code></pre>
-<pre><code class="lang-python"><span class="hljs-comment"># mysite/urls.py</span>
-<span class="hljs-keyword">from</span> django.conf <span class="hljs-keyword">import</span> settings
-<span class="hljs-keyword">from</span> django.conf.urls.static <span class="hljs-keyword">import</span> static
-...
-<span class="hljs-keyword">if</span> settings.DEBUG:
-    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-</code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/models.py</span>
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">upload_status_image</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">instance</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">filename</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-string">&quot;status/{user}/{filename}&quot;</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">format</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">instance</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">filename</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">filename</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/settings.py</span>
+<span class="sunlight-ident">MEDIA_ROOT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">os</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">path</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">join</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">BASE_DIR</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;media_root&apos;</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-ident">MEDIA_URL</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;/media/&apos;</span>
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/urls.py</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">settings</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">static</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">static</span>
+<span class="sunlight-ellipsis">...</span>
+<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">DEBUG</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-ident">static</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">STATIC_URL</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">document_root</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">STATIC_ROOT</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-ident">static</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">MEDIA_URL</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">document_root</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">MEDIA_ROOT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 <h2 id="create">Create</h2>
-<pre><code class="lang-python"><span class="hljs-keyword">import</span> json
-<span class="hljs-keyword">import</span> requests
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">json</span>
+<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">requests</span>
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_img</span><span class="hljs-params">(method=<span class="hljs-string">&apos;get&apos;</span>, data={}, image_path=None, endpoint=None)</span>:</span>
-    headers = {}
-    <span class="hljs-keyword">if</span> image_path <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
-        <span class="hljs-keyword">with</span> open(image_path, <span class="hljs-string">&apos;rb&apos;</span>) <span class="hljs-keyword">as</span> image:
-            file_data = {<span class="hljs-string">&apos;image&apos;</span>: image}
-            r = requests.request(method, endpoint, data=data, headers=headers, files=file_data)
-    <span class="hljs-keyword">else</span>:
-        headers[<span class="hljs-string">&apos;content-type&apos;</span>] = <span class="hljs-string">&apos;application/json&apos;</span>
-        data = json.dumps(data)
-        r = requests.request(method, endpoint, data=data, headers=headers)
-    print(r.text)
-    print(r.status_code)
-    <span class="hljs-keyword">return</span> r
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-delimiter">{</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">None</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">headers</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-delimiter">}</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">image_path</span>&#xA0;<span class="sunlight-keyword">is</span>&#xA0;<span class="sunlight-keyword">not</span>&#xA0;<span class="sunlight-constant">None</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">with</span>&#xA0;<span class="sunlight-function">open</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;rb&apos;</span><span class="sunlight-delimiter">)</span>&#xA0;<span class="sunlight-keyword">as</span>&#xA0;<span class="sunlight-ident">image</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">file_data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;image&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-ident">image</span><span class="sunlight-delimiter">}</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">headers</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">files</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">file_data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">else</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">[</span><span class="sunlight-string">&apos;content-type&apos;</span><span class="sunlight-delimiter">]</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;application/json&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">json</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">dumps</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">r</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">requests</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">request</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">headers</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">headers</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">text</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-function">print</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">r</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">status_code</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">r</span>
 
-<span class="hljs-comment"># Create</span>
-ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Create from external python&apos;</span>}
-image_path = <span class="hljs-string">&apos;d:/mai.jpg&apos;</span>
+<span class="sunlight-comment">#&#xA0;Create</span>
+<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">1</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;Create&#xA0;from&#xA0;external&#xA0;python&apos;</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">image_path</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;d:/mai.jpg&apos;</span>
 
-<span class="hljs-comment"># 1. No image</span>
-do_img(method=<span class="hljs-string">&apos;post&apos;</span>, data=data, endpoint=ENDPOINT)
-<span class="hljs-comment"># 2. With image</span>
-do_img(method=<span class="hljs-string">&apos;post&apos;</span>, data=data, image_path=image_path, endpoint=ENDPOINT)
-</code></pre>
+<span class="sunlight-comment">#&#xA0;1.&#xA0;No&#xA0;image</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;post&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-comment">#&#xA0;2.&#xA0;With&#xA0;image</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;post&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 <h2 id="list">List</h2>
-<pre><code class="lang-python">ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
-do_img(method=<span class="hljs-string">&apos;get&apos;</span>, endpoint=ENDPOINT)
-</code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/&apos;</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 <h2 id="detail">Detail</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># Detail</span>
-ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
-do_img(method=<span class="hljs-string">&apos;get&apos;</span>, endpoint=ENDPOINT)
-</code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;Detail</span>
+<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;get&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 <h2 id="update">Update</h2>
-<pre><code class="lang-python">ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
-data = {<span class="hljs-string">&apos;user&apos;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&apos;content&apos;</span>: <span class="hljs-string">&apos;Updata from external python with image.&apos;</span>}
-image_path = <span class="hljs-string">&apos;d:/astellia.jpg&apos;</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+<span class="sunlight-ident">data</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;user&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-number">1</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-string">&apos;content&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;Updata&#xA0;from&#xA0;external&#xA0;python&#xA0;with&#xA0;image.&apos;</span><span class="sunlight-delimiter">}</span>
+<span class="sunlight-ident">image_path</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;d:/astellia.jpg&apos;</span>
 
-<span class="hljs-comment"># 1. No image</span>
-do_img(method=<span class="hljs-string">&apos;put&apos;</span>, data=data, endpoint=ENDPOINT)
-<span class="hljs-comment"># 2. With image</span>
-do_img(method=<span class="hljs-string">&apos;put&apos;</span>, data=data, image_path=image_path, endpoint=ENDPOINT)
-</code></pre>
+<span class="sunlight-comment">#&#xA0;1.&#xA0;No&#xA0;image</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;put&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+<span class="sunlight-comment">#&#xA0;2.&#xA0;With&#xA0;image</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;put&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">data</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">data</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">image_path</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 <h2 id="delete">Delete</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># Delete</span>
-ENDPOINT = <span class="hljs-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
-do_img(method=<span class="hljs-string">&apos;delete&apos;</span>, endpoint=ENDPOINT)
-</code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;Delete</span>
+<span class="sunlight-ident">ENDPOINT</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;http://127.0.0.1:8000/api/status/23/&apos;</span>
+<span class="sunlight-ident">do_img</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">method</span><span class="sunlight-delimiter">=</span><span class="sunlight-string">&apos;delete&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">endpoint</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">ENDPOINT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 
                                 
                                 </section>
@@ -482,7 +482,7 @@ do_img(method=<span class="hljs-string">&apos;delete&apos;</span>, endpoint=ENDP
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"next":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"previous":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","ref":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/16_Uploading_Handling_Images.md","mtime":"2018-09-17T12:03:23.003Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:13:59.424Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"16. Uploading & Handling Images","level":"1.16","depth":1,"next":{"title":"17. Two Views for CRUDL","level":"1.17","depth":1,"path":"posts/17_Two_Views_for_CRUDL.md","ref":"posts/17_Two_Views_for_CRUDL.md","articles":[]},"previous":{"title":"15. One API Endpoint for CRUD Part II","level":"1.15","depth":1,"path":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","ref":"posts/15_One_API_Endpoint_for_CRUD_Part_2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/16_Uploading_Handling_Images.md","mtime":"2018-09-17T12:03:23.003Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:43:51.038Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

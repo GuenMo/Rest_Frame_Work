@@ -17,7 +17,7 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sunlight-highlighter/sunlight.css">
                 
             
                 
@@ -370,65 +370,65 @@
                                 
                                 <h1 id="3-status-model--app">3. Status Model &amp; App</h1>
 <h2 id="app-&#xC0DD;&#xC131;">App &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-commandlined">python managy.py startapp status
-</code></pre>
+<pre><code class="lang-commandlined"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandlined sunlight-highlighted"><span class="sunlight-plaintext">python&#xA0;managy.py&#xA0;startapp&#xA0;status
+</span></pre></div></div></code></pre>
 <h2 id="model-&#xC0DD;&#xC131;">Model &#xC0DD;&#xC131;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/models.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/models.py</span>
 
-<span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
-<span class="hljs-keyword">from</span> django.conf <span class="hljs-keyword">import</span> settings
-
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_status_image</span><span class="hljs-params">(instance, filename)</span>:</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;updateds/{user}/{filename}&quot;</span>.format(user=instance.user, filename=filename)
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">db</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">models</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">settings</span>
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusQuerySet</span><span class="hljs-params">(models.QuerySet)</span>:</span>
-    <span class="hljs-keyword">pass</span>
+<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">upload_status_image</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">instance</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">filename</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-string">&quot;updateds/{user}/{filename}&quot;</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">format</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">instance</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">user</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">filename</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">filename</span><span class="sunlight-delimiter">)</span>
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StatusManager</span><span class="hljs-params">(models.Manager)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> StatusQuerySet(self.model, using=self._db)
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusQuerySet</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">QuerySet</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">pass</span>
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Status</span><span class="hljs-params">(models.Model)</span>:</span>
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField(null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    image = models.ImageField(upload_to=upload_status_image, null=<span class="hljs-keyword">True</span>, blank=<span class="hljs-keyword">True</span>)
-    updated = models.DateTimeField(auto_now=<span class="hljs-keyword">True</span>)
-    timestamp = models.DateTimeField(auto_now_add=<span class="hljs-keyword">True</span>)
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusManager</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">Manager</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">get_queryset</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">StatusQuerySet</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">model</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">using</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">_db</span><span class="sunlight-delimiter">)</span>
 
-    objects = StatusManager()
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> str(self.content)[:<span class="hljs-number">50</span>]
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">Status</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">Model</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">user</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ForeignKey</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">AUTH_USER_MODEL</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">on_delete</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">CASCADE</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">content</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">TextField</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">null</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">blank</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">image</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">ImageField</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">upload_to</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">upload_status_image</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">null</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">blank</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">updated</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">DateTimeField</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">auto_now</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">timestamp</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">models</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">DateTimeField</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">auto_now_add</span><span class="sunlight-delimiter">=</span><span class="sunlight-constant">True</span><span class="sunlight-delimiter">)</span>
 
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>
-        verbose_name = <span class="hljs-string">&apos;Status post&apos;</span>
-        verbose_name_plural = <span class="hljs-string">&apos;Status posts&apos;</span>
-</code></pre>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">objects</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusManager</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-specialMethod">__str__</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-function">str</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">content</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">:</span><span class="sunlight-number">50</span><span class="sunlight-delimiter">]</span>
+
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">Meta</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">verbose_name</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;Status&#xA0;post&apos;</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">verbose_name_plural</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-string">&apos;Status&#xA0;posts&apos;</span>
+</span></pre></div></div></code></pre>
 <h2 id="app-&#xB4F1;&#xB85D;">App &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># mysite/settings.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/settings.py</span>
 
-INSTALLED_APPS = [
-    ...
-    <span class="hljs-string">&apos;status&apos;</span>
-]
-</code></pre>
+<span class="sunlight-ident">INSTALLED_APPS</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ellipsis">...</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-string">&apos;status&apos;</span>
+<span class="sunlight-delimiter">]</span>
+</span></pre></div></div></code></pre>
 <h2 id="migration">Migration</h2>
-<pre><code class="lang-commandline">python manage.py makemigrations
-python manage.py migrate
-</code></pre>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">python&#xA0;manage.py&#xA0;makemigrations
+python&#xA0;manage.py&#xA0;migrate
+</span></pre></div></div></code></pre>
 <h2 id="admin-page-&#xB4F1;&#xB85D;">Admin page &#xB4F1;&#xB85D;</h2>
-<pre><code class="lang-python"><span class="hljs-comment"># status/admin.py</span>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/admin.py</span>
 
-<span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">contrib</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">admin</span>
 
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Status
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-delimiter">.</span><span class="sunlight-ident">models</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">Status</span>
 
-admin.site.register(Status)
-</code></pre>
+<span class="sunlight-ident">admin</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">site</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">register</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">Status</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 
                                 
                                 </section>
@@ -472,7 +472,7 @@ admin.site.register(Status)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. Status Model & App","level":"1.3","depth":1,"next":{"title":"4. Model Form for Validation","level":"1.4","depth":1,"path":"posts/04_Model_From_for_Validation.md","ref":"posts/04_Model_From_for_Validation.md","articles":[]},"previous":{"title":"2. Install the Django Rest Framework","level":"1.2","depth":1,"path":"posts/02_Install_the_Django_Rest_Framework.md","ref":"posts/02_Install_the_Django_Rest_Framework.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/03_Status_Model_App.md","mtime":"2018-09-13T10:05:43.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:13:59.424Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. Status Model & App","level":"1.3","depth":1,"next":{"title":"4. Model Form for Validation","level":"1.4","depth":1,"path":"posts/04_Model_From_for_Validation.md","ref":"posts/04_Model_From_for_Validation.md","articles":[]},"previous":{"title":"2. Install the Django Rest Framework","level":"1.2","depth":1,"path":"posts/02_Install_the_Django_Rest_Framework.md","ref":"posts/02_Install_the_Django_Rest_Framework.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/03_Status_Model_App.md","mtime":"2018-09-13T10:05:43.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-17T12:43:51.038Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
