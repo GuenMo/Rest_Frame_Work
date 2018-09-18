@@ -23,3 +23,5 @@
 - [21. Implement JWT Authentication](posts/21_Implement_JWT_Authentication.md)
 - [22. JWT Authorization Header](posts/22_JWT_Authorization_Header.md)
 - [23. Custom JWT Response Payload Handler](posts/23_Custom_JWT_Response_Payload_Handler.md)
+- [24. Custom Authentication View](posts/24_Custom_Authentication_View.md)
+- [29. Custom Permissions](posts/29_Custom_Permissions.md)

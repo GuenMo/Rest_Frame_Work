@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>12. Update & Delete API Views · GitBook</title>
+        <title>24. Custom Authentication View · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="13_Mixins_to_Power_Http_Methods.html" />
+    <link rel="next" href="29_Custom_Permissions.html" />
     
     
-    <link rel="prev" href="11_Detail_API_View.html" />
+    <link rel="prev" href="23_Custom_JWT_Response_Payload_Handler.html" />
     
 
     </head>
@@ -232,7 +232,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.12" data-path="12_Update_Delete_API_Views.html">
+        <li class="chapter " data-level="1.12" data-path="12_Update_Delete_API_Views.html">
             
                 <a href="12_Update_Delete_API_Views.html">
             
@@ -388,7 +388,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.24" data-path="24_Custom_Authentication_View.html">
+        <li class="chapter active" data-level="1.24" data-path="24_Custom_Authentication_View.html">
             
                 <a href="24_Custom_Authentication_View.html">
             
@@ -444,7 +444,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >12. Update & Delete API Views</a>
+        <a href=".." >24. Custom Authentication View</a>
     </h1>
 </div>
 
@@ -459,43 +459,54 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="12-update--delete-api-views">12. Update &amp; Delete API Views</h1>
-<h2 id="create-view">Create view</h2>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/api/views.py</span>
+                                <h1 id="24-custom-authentication-view">24. Custom Authentication View</h1>
+<blockquote>
+<p>main urls.py&#xC5D0; auth &#xACFC;&#xB828; url&#xC744; &#xB3C5;&#xB9BD; &#xC2DC;&#xD0A8;&#xB2E4;.</p>
+</blockquote>
+<h2 id="main-urlspy">Main urls.py</h2>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;mysite/urls.py</span>
 
-<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusUpdateAPIView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">generics</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">UpdateAPIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">permission_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">authentication_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">queryset</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">objects</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">all</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer_class</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
-</span></pre></div></div></code></pre>
-<h2 id="delete-view">Delete view</h2>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/api/views.py</span>
-
-<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">StatusDeleteAPIView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">generics</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">DestroyAPIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">permission_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">authentication_classes</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span><span class="sunlight-delimiter">]</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">queryset</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">Status</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">objects</span><span class="sunlight-delimiter">.</span><span class="sunlight-function">all</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">serializer_class</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">StatusSerializer</span>
-</span></pre></div></div></code></pre>
-<h2 id="urls-&#xCD94;&#xAC00;">urls &#xCD94;&#xAC00;</h2>
-<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;status/api/urls.py</span>
-
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">path</span>
-
-<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">StatusAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusCreateAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDetailAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusUpdateAPIView</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDeleteAPIView</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">settings</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">conf</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">static</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">static</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">contrib</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">admin</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span>
 
 <span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;create/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusCreateAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&lt;int:pk&gt;/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDetailAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&lt;int:pk&gt;/update/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusUpdateAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
-&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&lt;int:pk&gt;/delete/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">StatusDeleteAPIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;admin/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">admin</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">site</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/auth/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;accounts.api.urls&apos;</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;api/status/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">include</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;status.api.urls&apos;</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+<span class="sunlight-delimiter">]</span>
+
+<span class="sunlight-keyword">if</span>&#xA0;<span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">DEBUG</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-ident">static</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">STATIC_URL</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">document_root</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">STATIC_ROOT</span><span class="sunlight-delimiter">)</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-operator">+</span>&#xA0;<span class="sunlight-ident">static</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">MEDIA_URL</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">document_root</span><span class="sunlight-delimiter">=</span><span class="sunlight-ident">settings</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">MEDIA_ROOT</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
+<h2 id="api-view">API View</h2>
+<pre><code class="lang-commandline"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-commandline sunlight-highlighted"><span class="sunlight-plaintext">touch&#xA0;restapi/accounts/api/urls.py
+touch&#xA0;restapi/accounts/api/views.py
+</span></pre></div></div></code></pre>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;restapi/accounts/api/urls.py</span>
+
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">django</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">urls</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">path</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">APIView</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework_jwt</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">obtain_jwt_token</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">refresh_jwt_token</span>
+
+<span class="sunlight-ident">urlpatterns</span>&#xA0;<span class="sunlight-delimiter">=</span>&#xA0;<span class="sunlight-delimiter">[</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">APIView</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">as_view</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;jwt/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">obtain_jwt_token</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-ident">path</span><span class="sunlight-delimiter">(</span><span class="sunlight-string">&apos;jwt/refresh/&apos;</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">refresh_jwt_token</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">,</span>
 <span class="sunlight-delimiter">]</span>
 </span></pre></div></div></code></pre>
-<h2 id="test">Test</h2>
-<p><a href="http://127.0.0.1:8000/api/status/5/update/" target="_blank">http://127.0.0.1:8000/api/status/5/update/</a></p>
-<p><a href="http://127.0.0.1:8000/api/status/5/delete/" target="_blank">http://127.0.0.1:8000/api/status/5/delete/</a></p>
+<pre><code class="lang-python"><div class="sunlight-container sunlight-theme-dark"><div class="sunlight-code-container"><pre class="sunlight-highlight-python sunlight-highlighted"><span class="sunlight-python"><span class="sunlight-comment">#&#xA0;restapi/accounts/api/views.py</span>
+
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">views</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">APIView</span>
+<span class="sunlight-keyword">from</span>&#xA0;<span class="sunlight-ident">rest_framework</span><span class="sunlight-delimiter">.</span><span class="sunlight-ident">response</span>&#xA0;<span class="sunlight-keyword">import</span>&#xA0;<span class="sunlight-ident">Response</span>
+
+
+<span class="sunlight-keyword">class</span>&#xA0;<span class="sunlight-named-ident">AuthView</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">APIView</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">def</span>&#xA0;<span class="sunlight-named-ident">post</span><span class="sunlight-delimiter">(</span><span class="sunlight-ident">self</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-ident">request</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">*</span><span class="sunlight-ident">args</span><span class="sunlight-delimiter">,</span>&#xA0;<span class="sunlight-operator">**</span><span class="sunlight-ident">kwargs</span><span class="sunlight-delimiter">)</span><span class="sunlight-delimiter">:</span>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="sunlight-keyword">return</span>&#xA0;<span class="sunlight-ident">Response</span><span class="sunlight-delimiter">(</span><span class="sunlight-delimiter">{</span><span class="sunlight-string">&apos;token&apos;</span><span class="sunlight-delimiter">:</span>&#xA0;<span class="sunlight-string">&apos;abc&apos;</span><span class="sunlight-delimiter">}</span><span class="sunlight-delimiter">)</span>
+</span></pre></div></div></code></pre>
 
                                 
                                 </section>
@@ -523,12 +534,12 @@
 
             
                 
-                <a href="11_Detail_API_View.html" class="navigation navigation-prev " aria-label="Previous page: 11. Detail API View">
+                <a href="23_Custom_JWT_Response_Payload_Handler.html" class="navigation navigation-prev " aria-label="Previous page: 23. Custom JWT Response Payload Handler">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="13_Mixins_to_Power_Http_Methods.html" class="navigation navigation-next " aria-label="Next page: 13. Mixin to Power Http Methods">
+                <a href="29_Custom_Permissions.html" class="navigation navigation-next " aria-label="Next page: 29. Custom Permissions">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -539,7 +550,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"12. Update & Delete API Views","level":"1.12","depth":1,"next":{"title":"13. Mixin to Power Http Methods","level":"1.13","depth":1,"path":"posts/13_Mixins_to_Power_Http_Methods.md","ref":"posts/13_Mixins_to_Power_Http_Methods.md","articles":[]},"previous":{"title":"11. Detail API View","level":"1.11","depth":1,"path":"posts/11_Detail_API_View.md","ref":"posts/11_Detail_API_View.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/12_Update_Delete_API_Views.md","mtime":"2018-09-13T13:54:23.597Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-18T11:18:44.519Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"24. Custom Authentication View","level":"1.24","depth":1,"next":{"title":"29. Custom Permissions","level":"1.25","depth":1,"path":"posts/29_Custom_Permissions.md","ref":"posts/29_Custom_Permissions.md","articles":[]},"previous":{"title":"23. Custom JWT Response Payload Handler","level":"1.23","depth":1,"path":"posts/23_Custom_JWT_Response_Payload_Handler.md","ref":"posts/23_Custom_JWT_Response_Payload_Handler.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"BASE_URL":"https://guenmo.github.io/GuenMo/Rest_Frame_Work"},"plugins":["ga","-highlight","sunlight-highlighter"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-123456-1"},"sunlight-highlighter":{"lineNumbers":false,"theme":"dark","lineNumber":true},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"posts/24_Custom_Authentication_View.md","mtime":"2018-09-18T00:52:11.572Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-18T11:18:44.519Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
